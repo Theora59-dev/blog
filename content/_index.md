@@ -8,16 +8,11 @@ framed = true
 max_posts = 999
 +++
 
+# Hey, Salut ! 👋🏼
 
+Bienvenue sur mon blog fait à l'aide du générateur HTML statique [Zola](https://www.getzola.org/) (Merci aux devs 😁) !
 
-# Hello there! 👋🏼
+> Ce petit espace est dédié à mes projets, mes découvertes et quelques réflexions personnelles autour de la tech, de la cybersécurité et du développement.
 
-Welcome to a demo of `terminus`, a minimal dark theme for the
-[Zola](https://www.getzola.org/) static site generator. This theme was loosely
-inspired by these sources:
-
-* [panr/hugo-theme-terminal](https://github.com/panr/hugo-theme-terminal)
-* [ejmg/zerm](https://github.com/ejmg/zerm)
-* [welpo/tabi](https://github.com/welpo/tabi)
-
-Please feel free to look around!
+N’hésite pas à parcourir les articles et à m'envoyer un mail à clem6kiruagon@gmx.fr si besoin ! 🚀 
+Bonne lecture !
