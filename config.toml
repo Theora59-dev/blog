@@ -1,0 +1,39 @@
+# The URL the site will be built for
+theme = "terminus"
+base_url = "http://localhost"
+title = "Theora59 Devs Adventures"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+taxonomies = [
+    { name = "tags", feed = true },
+    { name = "categories", feed = true, paginate_by = 5 },
+]
+
+[markdown]
+highlight_code = true
+
+
+[extra]
+# Put all your custom variables here
+description = "Blog d'un étudiant en info passionné par Rust, l'embarqué, le pentest et moultes autres technologies"
+author = "Theora59-dev"
+github = "https://github.com/theora59-dev"
+show_socials = false
+
+close_responsive_menu_on_resize = true
+copy_button = true
+layout = "center"
+show_default_author = false
+
+main_menu = [
+    { name = "Accueil", url = "/", trailing_slash = true },
+    { name = "Projets", url = "projets", trailing_slash = true },
+    { name = "Cours", url = "cours", trailing_slash = true },
+    { name = "Tags", url = "tags", trailing_slash = true },
+    { name = "Github", url = "https://github.com/Theora59-dev/", new_tab = true },
+]
