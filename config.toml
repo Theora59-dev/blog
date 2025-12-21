@@ -1,6 +1,6 @@
 # The URL the site will be built for
 theme = "terminus"
-base_url = "http://localhost"
+base_url = "https://theora59-dev.github.io/blog/"
 title = "Theora59 Devs Adventures"
 
 # Whether to automatically compile all Sass files in the sass directory
