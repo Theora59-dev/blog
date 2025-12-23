@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src-attr 'unsafe-inline'">
+
+    <title>DVWA - Command Injection | Theora59 Devs Adventures</title>
+
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://theora59-dev.github.io/blog/css/style.css?h=b15039a827e49a424ac9">
+    <script src="https://theora59-dev.github.io/blog/js/auto-close-popover-on-resize.js?h=4ef87d6fc7b98b22e044" defer></script>
+    <script src="https://theora59-dev.github.io/blog/js/copy-code-to-clipboard.js?h=6aac77c47d552a0ac847" defer></script>
+
+    <link rel="canonical" href="https://theora59-dev.github.io/blog/cours/cmd-injection/">
+    <link rel="alternate" type="application/atom+xml" href="https://theora59-dev.github.io/blog/atom.xml" title="Theora59 Devs Adventures">
+    
+    <meta name="description" content="Explication technique">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#211f1a">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:title" content="DVWA - Command Injection">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://theora59-dev.github.io/blog/cours/cmd-injection/">
+    <meta property="og:description" content="Explication technique">
+    <meta property="og:site_name" content="Theora59 Devs Adventures">
+    <meta property="og:updated_time" content="2025-12-23T17:49:05.982304505+01:00">
+    <meta property="article:published_time" content="2025-12-21T00:00:00+00:00">
+    <meta property="article:tag" content="cybersécurité">
+    <meta property="article:tag" content="DVWA">
+    <meta property="article:tag" content="web">
+</head>
+
+<body class="layout-center">
+    <header class="header">
+        <div class="header-container">
+            <span class="header-logo-container">
+                <a href="https://theora59-dev.github.io/blog">
+                    <span class="logo">Theora59 Devs Adventures</span>
+                </a>
+            </span>
+        </div>
+        <nav class="main-menu" aria-label="Main Menu">
+            <a class="skip-to-content" href="#main">Skip to main content</a>
+            <button class="main-menu-dropdown-button" popovertarget="nav-menu">Menu</button>
+            <ul id="nav-menu" class="main-menu-items" aria-label="Site Navigation" popover>
+                <li><a href="https://theora59-dev.github.io/blog/">Accueil</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/projets/">Projets</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/cours/">Cours</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/tags/">Tags</a></li>
+                <li><a href="https://github.com/Theora59-dev/" target="_blank">Github</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main">
+        <article class="post content">
+            <header>
+                <h1 class="post-title">
+                    <a href="https://theora59-dev.github.io/blog/cours/cmd-injection/">DVWA - Command Injection</a>
+                </h1>
+                <ul class="post-meta hidden">
+                    <li title="Published on 2025-12-21"><time datetime="2025-12-21">2025.12.21</time></li>
+                    <li role="separator" aria-hidden="true">::</li>
+                    <li title="181 words"><time datetime="PT1M">1 min</time> read</li>
+                </ul>
+                <div class="post-tags">
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/cybersecurite/">cybersécurité</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/dvwa/">DVWA</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/web/">web</a></span>
+                </div>
+            </header>
+
+<h2 id="easy">Easy:</h2>
+<p>Au niveau Easy, aucune validation n'empêche l'injection directe. La commande PHP exécute ping IP sans filtrage, permettant d'ajouter une seconde commande via des séparateurs shell comme <code>;</code>, <code>&amp;&amp;</code> ou <code>||</code>.</p>
+<ul>
+<li>Entrez <code>127.0.0.1; whoami</code> pour exécuter <code>ping 127.0.0.1</code> suivi de <code>whoami</code>, affichant l'utilisateur du serveur.</li>
+<li><code>127.0.0.1 &amp;&amp; ls</code> fonctionne si la première commande réussit, listant les fichiers.</li>
+<li>Ces séparateurs chainent les commandes sans restriction.</li>
+</ul>
+<h2 id="medium">Medium:</h2>
+<p>DVWA applique un blacklistage basique via <code>str_replace</code>, supprimant <code>;</code>, <code>&amp;&amp;</code> et <code>||</code> en remplaçant par des espaces vides, rendant les injections classiques inefficaces</p>
+<ul>
+<li>Testez <code>127.0.0.1 || whoami</code> : le double pipe <code>||</code> exécute la seconde commande seulement si la première échoue, contournant partiellement le filtre car <code>||</code> n'est pas toujours bloqué immédiatement.</li>
+<li>Si <code>||</code> est filtré, essayez le pipe simple <code>|</code> pour forcer l'exécution conditionnelle.</li>
+<li>Une IP invalide comme <code>999.999.999.999 || id</code> déclenche l'échec du <code>ping</code>, exécutant <code>id</code>.</li>
+</ul>
+<h2 id="high">High:</h2>
+<p>Les filtres s'intensifient : espaces interdits, whitespaces remplacés, et extension de la blacklist aux séparateurs courants, bloquant les injections en une ligne.</p>
+<ul>
+<li>Solution experimentale: Faire passer la requête par un Proxy (BurpSuite) et insérer un saut de ligne dans le champ vulnérable
+<img src="https://theora59-dev.github.io/blog/processed_images/Command Injection illustration.6956b9702e8a4999.png" alt="Responsive hi-res image"
+     width="728" height="419"
+     sizes="(min-width: 920px) 784px, (min-width: 700px) calc(82vw + 46px), calc(100vw - 40px)" 
+     srcset="https://theora59-dev.github.io/blog/processed_images/Command Injection illustration.c81c432fdea5b096.png 640w"
+     loading="lazy">
+</li>
+</ul>
+
+        </article>
+        <nav class="post-navigation">
+            <header class="post-navigation-title">
+                <h2>Read More Posts</h2>
+                <hr>
+            </header>
+            <div class="post-navigation-buttons">
+                <a rel="next" href="https://theora59-dev.github.io/blog/cours/brute-force/" aria-label="Next article">
+                    <span aria-hidden="true">&lt;&nbsp;[</span>DVWA - Brute Force<span aria-hidden="true">]</span>
+                </a>
+                <span aria-hidden="true" role="separator">::</span>
+                <a rel="prev" href="https://theora59-dev.github.io/blog/cours/csp-bypass/" aria-label="Prev article">
+                    <span aria-hidden="true">[</span>DVWA - CSP Bypass<span aria-hidden="true">]&nbsp;&gt;</span>
+                </a>
+            </div>
+        </nav>
+    </main>
+    <footer class="footer">
+        <address class="socials">
+            <ul>
+                <li>
+                    <a class="social-link" href="https://theora59-dev.github.io/blog/atom.xml" title="atom feed" aria-label="atom feed">
+                        <svg role="img" aria-label="feed icon">
+                            <use aria-hidden="true" href="https://theora59-dev.github.io/blog/images/social_icons/atom.svg#icon" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </address>
+        <p class="copyright">
+            <span>© <time>2025</time></span>
+            <span>Powered by <a href="https://www.getzola.org">Zola</a></span>
+            <span>Theme by <a href="https://eyalkalderon.com">ebkalderon</a></span>
+        </p>
+    </footer>
+</body>
+
+</html>

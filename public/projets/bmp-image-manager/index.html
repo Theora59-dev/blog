@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src-attr 'unsafe-inline'">
+
+    <title>FFI Rust&#x2F;C - Image BMP | Theora59 Devs Adventures</title>
+
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://theora59-dev.github.io/blog/css/style.css?h=b15039a827e49a424ac9">
+    <script src="https://theora59-dev.github.io/blog/js/auto-close-popover-on-resize.js?h=4ef87d6fc7b98b22e044" defer></script>
+    <script src="https://theora59-dev.github.io/blog/js/copy-code-to-clipboard.js?h=6aac77c47d552a0ac847" defer></script>
+
+    <link rel="canonical" href="https://theora59-dev.github.io/blog/projets/bmp-image-manager/">
+    <link rel="alternate" type="application/atom+xml" href="https://theora59-dev.github.io/blog/atom.xml" title="Theora59 Devs Adventures">
+    
+    <meta name="description" content="Librairie partagée de création d&#x27;image BMP">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#211f1a">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:title" content="FFI Rust/C - Image BMP">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://theora59-dev.github.io/blog/projets/bmp-image-manager/">
+    <meta property="og:description" content="Librairie partagée de création d&#x27;image BMP">
+    <meta property="og:site_name" content="Theora59 Devs Adventures">
+    <meta property="og:updated_time" content="2025-12-23T17:49:05.982289697+01:00">
+    <meta property="article:published_time" content="2025-12-13T00:00:00+00:00">
+    <meta property="article:tag" content="Graphique">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="C">
+    <meta property="article:tag" content="Librairie">
+</head>
+
+<body class="layout-center">
+    <header class="header">
+        <div class="header-container">
+            <span class="header-logo-container">
+                <a href="https://theora59-dev.github.io/blog">
+                    <span class="logo">Theora59 Devs Adventures</span>
+                </a>
+            </span>
+        </div>
+        <nav class="main-menu" aria-label="Main Menu">
+            <a class="skip-to-content" href="#main">Skip to main content</a>
+            <button class="main-menu-dropdown-button" popovertarget="nav-menu">Menu</button>
+            <ul id="nav-menu" class="main-menu-items" aria-label="Site Navigation" popover>
+                <li><a href="https://theora59-dev.github.io/blog/">Accueil</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/projets/">Projets</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/cours/">Cours</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/tags/">Tags</a></li>
+                <li><a href="https://github.com/Theora59-dev/" target="_blank">Github</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main">
+        <article class="post content">
+            <header>
+                <h1 class="post-title">
+                    <a href="https://theora59-dev.github.io/blog/projets/bmp-image-manager/">FFI Rust&#x2F;C - Image BMP</a>
+                </h1>
+                <ul class="post-meta hidden">
+                    <li title="Published on 2025-12-13"><time datetime="2025-12-13">2025.12.13</time></li>
+                    <li role="separator" aria-hidden="true">::</li>
+                    <li title="218 words"><time datetime="PT2M">2 min</time> read</li>
+                </ul>
+                <div class="post-tags">
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/graphique/">Graphique</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/rust/">Rust</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/c/">C</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/librairie/">Librairie</a></span>
+                </div>
+            </header>
+
+<h1 id="gestionnaire-d-image-bmp">Gestionnaire d'image BMP</h1>
+<p>Bibliothèque Rust pour créer et sauvegarder des images BMP à partir d'une matrice RGBA passée via FFI C.</p>
+<hr />
+<h2 id="presentation">Présentation</h2>
+<p>Cette bibliothèque Rust permet de créer une image BMP à partir d'une matrice de pixels au format RGBA reçue depuis un programme en C. Elle expose une fonction compatible C via FFI (Foreign Function Interface) pour faciliter l'interopérabilité.</p>
+<hr />
+<h2 id="fonction-principale-exposee">Fonction principale exposée</h2>
+<pre data-lang="C" style="background-color:#2b303b;color:#c0c5ce;" class="language-C "><code class="language-C" data-lang="C"><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">write_bmp_from_rgba_matrix</span><span>(
+</span><span style="color:#b48ead;">const </span><span>uint8_t* </span><span style="color:#bf616a;">rgba_matrix</span><span>,
+</span><span>uint32_t </span><span style="color:#bf616a;">width</span><span>,
+</span><span>uint32_t </span><span style="color:#bf616a;">height</span><span>,
+</span><span style="color:#b48ead;">const char</span><span>* file_path
+</span><span>);
+</span></code></pre>
+<ul>
+<li><strong>rgba_matrix</strong> : Pointeur vers un tableau plat d'octets représentant les pixels RGBA (largeur × hauteur × 4 octets).</li>
+<li><strong>width</strong> : Largeur de l'image en pixels.</li>
+<li><strong>height</strong> : Hauteur de l'image en pixels.</li>
+<li><strong>file_path</strong> : Chemin du fichier BMP où sauvegarder l'image (chaîne C terminée par zéro).</li>
+<li><strong>retour</strong> : 0 en cas de succès, -1 en cas d'erreur.</li>
+</ul>
+<hr />
+<h2 id="exemple-d-utilisation-en-c">Exemple d'utilisation en C</h2>
+<pre data-lang="C" style="background-color:#2b303b;color:#c0c5ce;" class="language-C "><code class="language-C" data-lang="C"><span style="color:#b48ead;">#include </span><span>&quot;</span><span style="color:#a3be8c;">bmp_image_manager.h</span><span>&quot;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdint.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdio.h</span><span>&gt;
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span style="color:#b48ead;">const </span><span>uint32_t width = </span><span style="color:#d08770;">42</span><span>;
+</span><span style="color:#b48ead;">const </span><span>uint32_t height = </span><span style="color:#d08770;">42</span><span>;
+</span><span>uint8_t rgba_matrix[width * height * </span><span style="color:#d08770;">4</span><span>];
+</span><span>
+</span><span>text
+</span><span style="color:#65737e;">// Remplir la matrice avec du rouge opaque
+</span><span style="color:#b48ead;">for </span><span>(uint32_t i = </span><span style="color:#d08770;">0</span><span>; i &lt; width * height; i++) {
+</span><span>    rgba_matrix[i * </span><span style="color:#d08770;">4 </span><span>+ </span><span style="color:#d08770;">0</span><span>] = </span><span style="color:#d08770;">255</span><span>;
+</span><span>    rgba_matrix[i * </span><span style="color:#d08770;">4 </span><span>+ </span><span style="color:#d08770;">1</span><span>] = </span><span style="color:#d08770;">0</span><span>; 
+</span><span>    rgba_matrix[i * </span><span style="color:#d08770;">4 </span><span>+ </span><span style="color:#d08770;">2</span><span>] = </span><span style="color:#d08770;">0</span><span>; 
+</span><span>    rgba_matrix[i * </span><span style="color:#d08770;">4 </span><span>+ </span><span style="color:#d08770;">3</span><span>] = </span><span style="color:#d08770;">0</span><span>; 
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">const char</span><span>* file_path = &quot;</span><span style="color:#a3be8c;">./image.bmp</span><span>&quot;;
+</span><span style="color:#b48ead;">int</span><span> res = </span><span style="color:#bf616a;">write_bmp_from_rgba_matrix</span><span>(rgba_matrix, width, height, file_path);
+</span><span>
+</span><span style="color:#b48ead;">if </span><span>(res == </span><span style="color:#d08770;">0</span><span>) {
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">Image bmp créée avec succès.</span><span style="color:#96b5b4;">\n</span><span>&quot;);
+</span><span>} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">Erreur lors de la création de l&#39;image bmp.</span><span style="color:#96b5b4;">\n</span><span>&quot;);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">return</span><span> res;
+</span><span>
+</span><span>}
+</span></code></pre>
+<hr />
+<h2 id="compilation-et-execution">Compilation et exécution</h2>
+<p>Compiler le binaire C en le liant avec la bibliothèque Rust :</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">gcc</span><span> votreprogramme.c</span><span style="color:#bf616a;"> -Lchemin_vers_le_dossier_contenant -lnom_du_fichier -o</span><span> nom_de_lexecutable`
+</span></code></pre>
+<p>Exemple: <code>gcc main.c -Lbmp_image_manager/target/release/ -lbmp_image_manager -o main</code></p>
+<p>Exécuter en précisant la variable d'environnement pour trouver la librairie dynamique :</p>
+<ul>
+<li>Sous linux:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">LD_LIBRARY_PATH</span><span>=</span><span style="color:#a3be8c;">chemin_vers_la_librairie </span><span style="color:#bf616a;">./nom_de_lexecutable
+</span></code></pre>
+<ul>
+<li>Par exemple:  <code>LD_LIBRARY_PATH=./bmp_image_manager/target/release ./main</code></li>
+</ul>
+<hr />
+<h2 id="fonctionnement-interne">Fonctionnement interne</h2>
+<ul>
+<li>La fonction Rust <code>write_bmp_from_rgba_matrix</code> convertit le tableau brut RGBA en image BMP en mémoire.</li>
+<li>Elle utilise la crate Rust <a href="https://crates.io/crates/bmp"><code>bmp</code></a> pour la gestion des pixels et la sauvegarde du fichier au format BMP.</li>
+</ul>
+<hr />
+<h2 id="licence-mit">Licence MIT</h2>
+<ul>
+<li>Merci de me contacter si vous voulez utiliser mon travail.</li>
+<li>Plus d'<a href="https://fr.wikipedia.org/wiki/Licence_MIT">informations</a></li>
+</ul>
+
+        </article>
+    </main>
+    <footer class="footer">
+        <address class="socials">
+            <ul>
+                <li>
+                    <a class="social-link" href="https://theora59-dev.github.io/blog/atom.xml" title="atom feed" aria-label="atom feed">
+                        <svg role="img" aria-label="feed icon">
+                            <use aria-hidden="true" href="https://theora59-dev.github.io/blog/images/social_icons/atom.svg#icon" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </address>
+        <p class="copyright">
+            <span>© <time>2025</time></span>
+            <span>Powered by <a href="https://www.getzola.org">Zola</a></span>
+            <span>Theme by <a href="https://eyalkalderon.com">ebkalderon</a></span>
+        </p>
+    </footer>
+</body>
+
+</html>
