@@ -12,7 +12,7 @@ template = "page.html"
 ## Mes Compétences
 - **Rust** : Backend, firmware from scratch, no_std pour microcontrôleurs, arduino et esp32.
 - **Cybersec** : Tests d'intrusions et audit basique de code (eJPT).
-- **Autres** : Python, Bash scripting, HTML/CSS/JS.
+- **Autres** : Python, Bash, HTML/CSS/JS.
 
 ## En ce moment
 - Études + projets open-source sur GitHub [@theora59-dev](https://github.com/theora59-dev).
