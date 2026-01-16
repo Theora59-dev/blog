@@ -22,7 +22,7 @@ tags = ["cybersécurité", "DVWA", "web"]
 - `UNION` concatène les résultats de la table users (colonnes user, password MD5), `--` commente le reste de la query.
 - Résultat : dump des credentials admin (ex. admin:5f4dcc3b5aa765d61d8327deb882cf99).
 
-  {{ responsive_image(src="20251223_160317.png", alt="Responsive hi-res image") }}
+  ![]("20251223_160317.png")
 
 ## Medium
 

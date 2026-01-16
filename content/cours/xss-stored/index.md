@@ -14,10 +14,10 @@ tags = ["cybersécurité", "DVWA", "web"]
 ## Low
 
 > Voici un apercu de l'application vulnérable
-{{ responsive_image(src="illustration1.png", alt="Image d'illustration") }}
+![]("illustration1.png")
 
 - Au niveau Easy, aucune protection n'empêche l'injection de code JavaScript. Entrez simplement `<script>alert('Something')</script>` dans le champ "Message" du guestbook et soumettez.
-{{ responsive_image(src="illustration2.png", alt="Image d'illustration") }}
+![]("illustration2.png")
 
 ## Medium
 
@@ -27,6 +27,6 @@ tags = ["cybersécurité", "DVWA", "web"]
 ## Hard
 - L'application protège le champs "Message" suffisamment, et le champ "Name" limite la quantitée de caractère entré. 
 - Il faut donc utiliser un proxy (Burp) pour auditer correctement l'applicative.
-{{ responsive_image(src="illustration3.png", alt="Image d'illustration") }}
+![]("illustration3.png")
 - Et ça fonctionne !!
-{{ responsive_image(src="illustration4.png", alt="Image d'illustration") }}
+![]("illustration4.png")

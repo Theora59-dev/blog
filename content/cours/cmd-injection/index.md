@@ -27,4 +27,4 @@ Les filtres s'intensifient : espaces interdits, whitespaces remplacés, et exten
 
 
 - Solution experimentale: Faire passer la requête par un Proxy (BurpSuite) et insérer un saut de ligne dans le champ vulnérable 
-{{ responsive_image(src="Command Injection illustration.png", alt="Responsive hi-res image") }}
+![]("Command Injection illustration.png")
