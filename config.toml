@@ -40,9 +40,9 @@ header_menu_name = "main_menu"
 [extra.menus]
 # Définir le menu "main_menu" (le nom doit correspondre à header_menu_name)
 main_menu = [
-    { url = "/", name = "Accueil", trailing_slash = true },
-    { url = "/projets/", name = "Projets", trailing_slash = true },
-    { url = "/cours/", name = "Cours", trailing_slash = true },
-    { url = "/tags/", name = "Tags", trailing_slash = true },
+    { url = "/blog", name = "Accueil", trailing_slash = true },
+    { url = "/blog/projets/", name = "Projets", trailing_slash = true },
+    { url = "/blog/cours/", name = "Cours", trailing_slash = true },
+    { url = "/blog/tags/", name = "Tags", trailing_slash = true },
     { url = "https://github.com/Theora59-dev/", name = "Github", new_tab = true },
 ]
