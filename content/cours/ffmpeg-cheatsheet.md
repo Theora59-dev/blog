@@ -1,6 +1,6 @@
 +++
 title = "Cheatsheet FFMPEG"
-date = 2025-12-21
+date = 2026-05-05
 categories = ["FFMPEG"]
 description = "Option, utilisation et cas d'usage de l'outil FFMPEG"
 
