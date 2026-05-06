@@ -2,7 +2,7 @@
 
 > Posté le 6 mai 2026
 
-J'ai récemment travaillé sur **Satisfactorio**, une ébauche de jeu voxel multijoueur en Rust développé from scratch avec un ami. Le projet ayant atteint un stade très correct de maturité, j'ai souhaité vous faire part de l'architecture et du système réseau que j'ai implémenté pour relier le client et le serveur. (Ça me permettra aussi d'avoir une trace du système et son évolution pour la suite du projet)
+J'ai récemment travaillé sur **Satisfactorio**, une ébauche de jeu voxel multijoueur en Rust développé from scratch avec [@StrachyDev](https://github.com/strachydev). Le projet ayant atteint un stade très correct de maturité, j'ai souhaité vous faire part de l'architecture et du système réseau que j'ai implémenté pour relier le client et le serveur. (Ça me permettra aussi d'avoir une trace du système et son évolution pour la suite du projet)
 
 ![Architecture globale](../assets/images/satisfactorio/architecture.svg)
 

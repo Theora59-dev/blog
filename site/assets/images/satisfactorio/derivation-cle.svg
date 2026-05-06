@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 600 285"
+   font-family="system-ui, '-apple-system', sans-serif"
+   version="1.1"
+   id="svg14"
+   sodipodi:docname="derivation-cle.svg"
+   width="600"
+   height="285"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1827968"
+     inkscape:cx="295.06336"
+     inkscape:cy="133.58169"
+     inkscape:window-width="1614"
+     inkscape:window-height="981"
+     inkscape:window-x="66"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg14" />
+  <defs
+     id="defs2">
+    <linearGradient
+       id="bg"
+       x1="0"
+       y1="0"
+       x2="363.31805"
+       y2="363.31805"
+       gradientTransform="matrix(1.6514456,0,0,0.78238469,-2.2888184e-6,0)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#1e1e2e"
+         id="stop1" />
+      <stop
+         offset="100%"
+         style="stop-color:#181825"
+         id="stop2" />
+    </linearGradient>
+    <filter
+       id="shadow"
+       x="-0.0039473684"
+       y="-0.0078947368"
+       width="1.0078947"
+       height="1.0157895">
+      <feDropShadow
+         dx="0"
+         dy="2"
+         stdDeviation="3"
+         flood-color="#000"
+         flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <rect
+     width="600"
+     height="284.25449"
+     rx="12"
+     fill="url(#bg)"
+     id="rect2"
+     style="fill:url(#bg);stroke-width:1.13669"
+     x="0"
+     y="0" />
+  <text
+     x="300"
+     y="35"
+     text-anchor="middle"
+     fill="#cdd6f4"
+     font-size="14px"
+     font-weight="600"
+     id="text2">Dérivation de la clé secrète partagée</text>
+  <!-- server_id cloud -->
+  <rect
+     x="230"
+     y="55"
+     width="140"
+     height="30"
+     rx="15"
+     fill="#45475a"
+     id="rect3" />
+  <text
+     x="300"
+     y="75"
+     text-anchor="middle"
+     fill="#cdd6f4"
+     font-size="11px"
+     id="text3">server_id (16 bytes)</text>
+  <!-- Arrows down -->
+  <line
+     x1="230"
+     y1="85"
+     x2="170"
+     y2="120"
+     stroke="#89b4fa"
+     stroke-width="1.5"
+     marker-end="url(#arrowBlue)"
+     id="line3" />
+  <line
+     x1="370"
+     y1="85"
+     x2="430"
+     y2="120"
+     stroke="#a6e3a1"
+     stroke-width="1.5"
+     marker-end="url(#arrowGreen)"
+     id="line4" />
+  <!-- Client box -->
+  <rect
+     x="40"
+     y="110"
+     width="190"
+     height="95"
+     rx="10"
+     fill="#313244"
+     stroke="#89b4fa"
+     stroke-width="1.5"
+     filter="url(#shadow)"
+     id="rect4" />
+  <text
+     x="135"
+     y="135"
+     text-anchor="middle"
+     fill="#89b4fa"
+     font-size="12px"
+     font-weight="600"
+     id="text4">CLIENT</text>
+  <rect
+     x="55"
+     y="145"
+     width="160"
+     height="22"
+     rx="4"
+     fill="#45475a"
+     id="rect5" />
+  <text
+     x="135"
+     y="160"
+     text-anchor="middle"
+     fill="#cdd6f4"
+     font-size="10px"
+     id="text5">server_id + SALT + token</text>
+  <rect
+     x="55"
+     y="172"
+     width="160"
+     height="28"
+     rx="4"
+     fill="#45475a"
+     id="rect6" />
+  <text
+     x="135"
+     y="191"
+     text-anchor="middle"
+     fill="#f9e2af"
+     font-size="11px"
+     id="text6">SHA-256</text>
+  <!-- Server box -->
+  <rect
+     x="370"
+     y="110"
+     width="190"
+     height="95"
+     rx="10"
+     fill="#313244"
+     stroke="#a6e3a1"
+     stroke-width="1.5"
+     filter="url(#shadow)"
+     id="rect7" />
+  <text
+     x="465"
+     y="135"
+     text-anchor="middle"
+     fill="#a6e3a1"
+     font-size="12px"
+     font-weight="600"
+     id="text7">SERVEUR</text>
+  <rect
+     x="385"
+     y="145"
+     width="160"
+     height="22"
+     rx="4"
+     fill="#45475a"
+     id="rect8" />
+  <text
+     x="465"
+     y="160"
+     text-anchor="middle"
+     fill="#cdd6f4"
+     font-size="10px"
+     id="text8">server_id + SALT + token</text>
+  <rect
+     x="385"
+     y="172"
+     width="160"
+     height="28"
+     rx="4"
+     fill="#45475a"
+     id="rect9" />
+  <text
+     x="465"
+     y="191"
+     text-anchor="middle"
+     fill="#f9e2af"
+     font-size="11px"
+     id="text9">SHA-256</text>
+  <!-- Keys coming out -->
+  <line
+     x1="135"
+     y1="205"
+     x2="135"
+     y2="225"
+     stroke="#f38ba8"
+     stroke-width="1.5"
+     marker-end="url(#arrowPink)"
+     id="line9" />
+  <rect
+     x="85"
+     y="225"
+     width="100"
+     height="24"
+     rx="4"
+     fill="#45475a"
+     id="rect10" />
+  <text
+     x="135"
+     y="242"
+     text-anchor="middle"
+     fill="#f38ba8"
+     font-size="10px"
+     id="text10">key [32 bytes]</text>
+  <line
+     x1="465"
+     y1="205"
+     x2="465"
+     y2="225"
+     stroke="#f38ba8"
+     stroke-width="1.5"
+     marker-end="url(#arrowPink)"
+     id="line10" />
+  <rect
+     x="415"
+     y="225"
+     width="100"
+     height="24"
+     rx="4"
+     fill="#45475a"
+     id="rect11" />
+  <text
+     x="465"
+     y="242"
+     text-anchor="middle"
+     fill="#f38ba8"
+     font-size="10px"
+     id="text11">key [32 bytes]</text>
+  <!-- Same key label -->
+  <rect
+     x="207.53636"
+     y="215.99091"
+     width="190"
+     height="28.227268"
+     rx="12"
+     fill="#45475a"
+     id="rect12"
+     style="stroke-width:1.0845" />
+  <text
+     x="302.53635"
+     y="232.99091"
+     text-anchor="middle"
+     fill="#cdd6f7"
+     font-size="10px"
+     id="text12">→ même clé des deux côtés ✓</text>
+  <defs
+     id="defs14">
+    <marker
+       id="arrowBlue"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M 0,0 8,3 0,6 Z"
+         fill="#89b4fa"
+         id="path12" />
+    </marker>
+    <marker
+       id="arrowGreen"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M 0,0 8,3 0,6 Z"
+         fill="#a6e3a1"
+         id="path13" />
+    </marker>
+    <marker
+       id="arrowPink"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M 0,0 8,3 0,6 Z"
+         fill="#f38ba8"
+         id="path14" />
+    </marker>
+  </defs>
+</svg>

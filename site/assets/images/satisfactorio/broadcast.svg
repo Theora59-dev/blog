@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 600 300"
+   font-family="system-ui, -apple-system, sans-serif"
+   version="1.1"
+   id="svg21"
+   sodipodi:docname="broadcast.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview21"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="6.9390747"
+     inkscape:cx="314.88348"
+     inkscape:cy="200.60311"
+     inkscape:window-width="1614"
+     inkscape:window-height="981"
+     inkscape:window-x="66"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg21" />
+  <defs
+     id="defs2">
+    <linearGradient
+       id="bg"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         style="stop-color:#1e1e2e"
+         id="stop1" />
+      <stop
+         offset="100%"
+         style="stop-color:#181825"
+         id="stop2" />
+    </linearGradient>
+    <filter
+       id="shadow"
+       x="-0.0083333333"
+       y="-0.0125"
+       width="1.0166667"
+       height="1.025">
+      <feDropShadow
+         dx="0"
+         dy="2"
+         stdDeviation="3"
+         flood-color="#000"
+         flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <rect
+     width="600"
+     height="300"
+     rx="12"
+     fill="url(#bg)"
+     id="rect2" />
+  <text
+     x="300"
+     y="35"
+     text-anchor="middle"
+     fill="#cdd6f4"
+     font-size="14"
+     font-weight="600"
+     id="text2">Broadcast des positions (100 Hz)</text>
+  <!-- Server -->
+  <rect
+     x="240"
+     y="100"
+     width="120"
+     height="80"
+     rx="10"
+     fill="#313244"
+     stroke="#a6e3a1"
+     stroke-width="2"
+     filter="url(#shadow)"
+     id="rect3" />
+  <text
+     x="300"
+     y="117.13018"
+     text-anchor="middle"
+     fill="#a6e3a1"
+     font-size="14px"
+     font-weight="700"
+     id="text3">SERVEUR</text>
+  <text
+     x="300"
+     y="137.13019"
+     text-anchor="middle"
+     fill="#6c7086"
+     font-size="10px"
+     id="text4">Game State</text>
+  <text
+     x="300"
+     y="152.13019"
+     text-anchor="middle"
+     fill="#6c7086"
+     font-size="10px"
+     id="text5"><tspan
+       sodipodi:role="line"
+       id="tspan21"
+       x="300"
+       y="152.13019">Broadcast 100 Hz</tspan><tspan
+       sodipodi:role="line"
+       id="tspan22"
+       x="300"
+       y="164.63019">(configurable)</tspan></text>
+  <!-- Client A -->
+  <rect
+     x="40"
+     y="200"
+     width="120"
+     height="60"
+     rx="8"
+     fill="#313244"
+     stroke="#89b4fa"
+     stroke-width="1.5"
+     filter="url(#shadow)"
+     id="rect5" />
+  <text
+     x="100"
+     y="228"
+     text-anchor="middle"
+     fill="#89b4fa"
+     font-size="12"
+     font-weight="600"
+     id="text6">Joueur A</text>
+  <text
+     x="100"
+     y="248"
+     text-anchor="middle"
+     fill="#6c7086"
+     font-size="10"
+     id="text7">192.168.1.10</text>
+  <!-- Client B -->
+  <rect
+     x="240"
+     y="200"
+     width="120"
+     height="60"
+     rx="8"
+     fill="#313244"
+     stroke="#cba6f7"
+     stroke-width="1.5"
+     filter="url(#shadow)"
+     id="rect7" />
+  <text
+     x="300"
+     y="228"
+     text-anchor="middle"
+     fill="#cba6f7"
+     font-size="12"
+     font-weight="600"
+     id="text8">Joueur B</text>
+  <text
+     x="300"
+     y="248"
+     text-anchor="middle"
+     fill="#6c7086"
+     font-size="10"
+     id="text9">192.168.1.11</text>
+  <!-- Client C -->
+  <rect
+     x="440"
+     y="200"
+     width="120"
+     height="60"
+     rx="8"
+     fill="#313244"
+     stroke="#f9e2af"
+     stroke-width="1.5"
+     filter="url(#shadow)"
+     id="rect9" />
+  <text
+     x="500"
+     y="228"
+     text-anchor="middle"
+     fill="#f9e2af"
+     font-size="12"
+     font-weight="600"
+     id="text10">Joueur C</text>
+  <text
+     x="500"
+     y="248"
+     text-anchor="middle"
+     fill="#6c7086"
+     font-size="10"
+     id="text11">192.168.1.12</text>
+  <!-- Arrow A -> Server -->
+  <line
+     x1="100.17119"
+     y1="197.49338"
+     x2="232.29488"
+     y2="157.74278"
+     stroke="#89b4fa"
+     stroke-width="1.86429"
+     marker-end="url(#arrowBlue)"
+     id="line11" />
+  <text
+     x="156.74174"
+     y="172.89464"
+     text-anchor="middle"
+     fill="#89b4fa"
+     font-size="9px"
+     id="text12">pos A</text>
+  <!-- Arrow Server -> B -->
+  <line
+     x1="304.8913"
+     y1="184.07608"
+     x2="304.8913"
+     y2="204.07608"
+     stroke="#a6e3a1"
+     stroke-width="1.5"
+     marker-end="url(#arrowGreen)"
+     id="line12" />
+  <text
+     x="313.23947"
+     y="194.80908"
+     fill="#a6e3a1"
+     font-size="9px"
+     id="text13">pos A+C</text>
+  <!-- Arrow Server -> A -->
+  <line
+     x1="286.15256"
+     y1="181.52361"
+     x2="163.78351"
+     y2="218.8633"
+     stroke="#a6e3a1"
+     stroke-width="1.68989"
+     marker-end="url(#arrowGreen)"
+     id="line13" />
+  <text
+     x="183.95082"
+     y="222.71722"
+     fill="#a6e3a1"
+     font-size="9px"
+     id="text14">pos B+C</text>
+  <!-- Arrow Server -> C -->
+  <line
+     x1="310.29187"
+     y1="182.03639"
+     x2="436.81116"
+     y2="219.19946"
+     stroke="#a6e3a1"
+     stroke-width="1.71426"
+     marker-end="url(#arrowGreen)"
+     id="line14" />
+  <text
+     x="398.63992"
+     y="232.33099"
+     fill="#a6e3a1"
+     font-size="9px"
+     id="text15">pos A+B</text>
+  <!-- Arrow B -> Server -->
+  <line
+     x1="291.23642"
+     y1="203.87228"
+     x2="291.23642"
+     y2="183.87228"
+     stroke="#cba6f7"
+     stroke-width="1.5"
+     marker-end="url(#arrowPurple)"
+     id="line15" />
+  <text
+     x="263.9325"
+     y="196.33797"
+     fill="#cba6f7"
+     font-size="9px"
+     id="text16">pos B</text>
+  <!-- Arrow C -> Server -->
+  <line
+     x1="499.79361"
+     y1="195.49535"
+     x2="364.28162"
+     y2="151.16855"
+     stroke="#f9e2af"
+     stroke-width="1.99375"
+     marker-end="url(#arrowYellow)"
+     id="line16" />
+  <text
+     x="439.76447"
+     y="167.1653"
+     text-anchor="middle"
+     fill="#f9e2af"
+     font-size="9px"
+     id="text17">pos C</text>
+  <!-- Speed badge -->
+  <rect
+     x="230"
+     y="55"
+     width="140"
+     height="26"
+     rx="13"
+     fill="#45475a"
+     id="rect17" />
+  <text
+     x="300"
+     y="73"
+     text-anchor="middle"
+     fill="#f38ba8"
+     font-size="11"
+     font-weight="600"
+     id="text18">100 Hz broadcast</text>
+  <defs
+     id="defs21">
+    <marker
+       id="arrowBlue"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M0,0 L8,3 L0,6 Z"
+         fill="#89b4fa"
+         id="path18" />
+    </marker>
+    <marker
+       id="arrowGreen"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M0,0 L8,3 L0,6 Z"
+         fill="#a6e3a1"
+         id="path19" />
+    </marker>
+    <marker
+       id="arrowPurple"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M0,0 L8,3 L0,6 Z"
+         fill="#cba6f7"
+         id="path20" />
+    </marker>
+    <marker
+       id="arrowYellow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <path
+         d="M0,0 L8,3 L0,6 Z"
+         fill="#f9e2af"
+         id="path21" />
+    </marker>
+  </defs>
+</svg>

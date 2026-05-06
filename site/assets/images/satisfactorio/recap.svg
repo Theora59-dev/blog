@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1e2e"/>
+      <stop offset="100%" style="stop-color:#181825"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="420" rx="12" fill="url(#bg)"/>
+  <text x="300" y="35" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="600">Récapitulatif : du client au serveur</text>
+
+  <!-- Client side -->
+  <rect x="30" y="55" width="180" height="100" rx="10" fill="#313244" stroke="#89b4fa" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="120" y="80" text-anchor="middle" fill="#89b4fa" font-size="13" font-weight="700">CLIENT</text>
+  <text x="120" y="100" text-anchor="middle" fill="#6c7086" font-size="10">Tokio async tasks</text>
+  <text x="120" y="115" text-anchor="middle" fill="#6c7086" font-size="10">mpsc channels</text>
+  <text x="120" y="130" text-anchor="middle" fill="#6c7086" font-size="10">Game loop (wgpu)</text>
+  <text x="120" y="145" text-anchor="middle" fill="#6c7086" font-size="10">AES-256-GCM cipher</text>
+
+  <!-- Handshake zone -->
+  <rect x="240" y="55" width="120" height="100" rx="10" fill="#313244" stroke="#f9e2af" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="80" text-anchor="middle" fill="#f9e2af" font-size="12" font-weight="600">HANDSHAKE</text>
+  <text x="300" y="100" text-anchor="middle" fill="#6c7086" font-size="10">1. server_id</text>
+  <text x="300" y="115" text-anchor="middle" fill="#6c7086" font-size="10">2. SHA-256 key</text>
+  <text x="300" y="130" text-anchor="middle" fill="#6c7086" font-size="10">3. Handshake</text>
+  <text x="300" y="145" text-anchor="middle" fill="#6c7086" font-size="10">4. ServerSeed</text>
+
+  <!-- Server side -->
+  <rect x="390" y="55" width="180" height="100" rx="10" fill="#313244" stroke="#a6e3a1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="480" y="80" text-anchor="middle" fill="#a6e3a1" font-size="13" font-weight="700">SERVEUR</text>
+  <text x="480" y="100" text-anchor="middle" fill="#6c7086" font-size="10">TcpListener + spawn</text>
+  <text x="480" y="115" text-anchor="middle" fill="#6c7086" font-size="10">Game State global</text>
+  <text x="480" y="130" text-anchor="middle" fill="#6c7086" font-size="10">Broadcast 100 Hz</text>
+  <text x="480" y="145" text-anchor="middle" fill="#6c7086" font-size="10">AES-256-GCM cipher</text>
+
+  <!-- Arrows -->
+  <line x1="210" y1="90" x2="240" y2="90" stroke="#89b4fa" stroke-width="1.5"/>
+  <line x1="360" y1="90" x2="390" y2="90" stroke="#a6e3a1" stroke-width="1.5"/>
+  <line x1="210" y1="120" x2="240" y2="120" stroke="#89b4fa" stroke-width="1.5"/>
+  <line x1="360" y1="120" x2="390" y2="120" stroke="#a6e3a1" stroke-width="1.5"/>
+
+  <!-- Communication zone -->
+  <rect x="30" y="180" width="540" height="80" rx="10" fill="#313244" stroke="#f38ba8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="205" text-anchor="middle" fill="#f38ba8" font-size="13" font-weight="700">Communication chiffrée continue</text>
+
+  <!-- Packet types in comm -->
+  <rect x="50" y="215" width="100" height="26" rx="4" fill="#45475a"/>
+  <text x="100" y="233" text-anchor="middle" fill="#cdd6f4" font-size="10">PlayerTransform</text>
+
+  <rect x="160" y="215" width="70" height="26" rx="4" fill="#45475a"/>
+  <text x="195" y="233" text-anchor="middle" fill="#cdd6f4" font-size="10">Ping/Pong</text>
+
+  <rect x="240" y="215" width="80" height="26" rx="4" fill="#45475a"/>
+  <text x="280" y="233" text-anchor="middle" fill="#cdd6f4" font-size="10">WorldData</text>
+
+  <rect x="330" y="215" width="80" height="26" rx="4" fill="#45475a"/>
+  <text x="370" y="233" text-anchor="middle" fill="#cdd6f4" font-size="10">MovePlayer</text>
+
+  <rect x="420" y="215" width="130" height="26" rx="4" fill="#45475a"/>
+  <text x="485" y="233" text-anchor="middle" fill="#cdd6f4" font-size="10">MultiplePlayerTransform</text>
+
+  <!-- Packet format row -->
+  <rect x="30" y="285" width="540" height="55" rx="8" fill="#313244" stroke="#6c7086" stroke-width="1" filter="url(#shadow)"/>
+  <text x="100" y="310" text-anchor="middle" fill="#6c7086" font-size="10">Format sur le wire :</text>
+
+  <rect x="180" y="295" width="80" height="35" rx="4" fill="#45475a"/>
+  <text x="220" y="310" text-anchor="middle" fill="#f9e2af" font-size="10">4 bytes</text>
+  <text x="220" y="324" text-anchor="middle" fill="#6c7086" font-size="9">taille</text>
+
+  <rect x="263" y="295" width="200" height="35" rx="4" fill="#45475a"/>
+  <text x="363" y="310" text-anchor="middle" fill="#89b4fa" font-size="10">N bytes chiffrés AES-256-GCM</text>
+  <text x="363" y="324" text-anchor="middle" fill="#6c7086" font-size="9">nonce | ciphertext | GCM tag</text>
+
+  <!-- Callouts -->
+  <rect x="480" y="295" width="80" height="35" rx="4" fill="#45475a"/>
+  <text x="520" y="317" text-anchor="middle" fill="#f38ba8" font-size="10">max 64 Ko</text>
+
+  <!-- Bottom callouts -->
+  <rect x="30" y="360" width="170" height="30" rx="6" fill="#45475a"/>
+  <text x="115" y="380" text-anchor="middle" fill="#89b4fa" font-size="11">Tokio async</text>
+
+  <rect x="215" y="360" width="170" height="30" rx="6" fill="#45475a"/>
+  <text x="300" y="380" text-anchor="middle" fill="#a6e3a1" font-size="11">AES-256-GCM</text>
+
+  <rect x="400" y="360" width="170" height="30" rx="6" fill="#45475a"/>
+  <text x="485" y="380" text-anchor="middle" fill="#f9e2af" font-size="11">Challenge server_id</text>
+</svg>

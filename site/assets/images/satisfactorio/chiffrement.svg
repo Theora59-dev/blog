@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1e2e"/>
+      <stop offset="100%" style="stop-color:#181825"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="260" rx="12" fill="url(#bg)"/>
+  <text x="300" y="35" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="600">Chiffrement AES-256-GCM d'un paquet</text>
+
+  <!-- Input -->
+  <rect x="30" y="75" width="130" height="70" rx="8" fill="#313244" stroke="#89b4fa" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="95" y="100" text-anchor="middle" fill="#89b4fa" font-size="11" font-weight="600">Données brutes</text>
+  <text x="95" y="120" text-anchor="middle" fill="#6c7086" font-size="10">bincode sérialisé</text>
+  <text x="95" y="135" text-anchor="middle" fill="#6c7086" font-size="10">TypePaquet + payload</text>
+
+  <!-- Arrow -->
+  <line x1="160" y1="110" x2="220" y2="110" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- AES-GCM box -->
+  <rect x="220" y="65" width="160" height="100" rx="10" fill="#313244" stroke="#f9e2af" stroke-width="2" filter="url(#shadow)"/>
+  <text x="300" y="92" text-anchor="middle" fill="#f9e2af" font-size="13" font-weight="700">AES-256-GCM</text>
+
+  <!-- Inputs to AES box -->
+  <rect x="240" y="100" width="120" height="22" rx="4" fill="#45475a"/>
+  <text x="300" y="115" text-anchor="middle" fill="#cdd6f4" font-size="10">clé 32 bytes</text>
+
+  <rect x="240" y="126" width="120" height="22" rx="4" fill="#45475a"/>
+  <text x="300" y="141" text-anchor="middle" fill="#cdd6f4" font-size="10">nonce 12 bytes (OsRng)</text>
+
+  <!-- Nonce source -->
+  <rect x="220" y="175" width="160" height="28" rx="4" fill="#45475a"/>
+  <text x="300" y="193" text-anchor="middle" fill="#6c7086" font-size="10">OsRng.fill_bytes() → CSPRNG</text>
+  <line x1="300" y1="165" x2="300" y2="175" stroke="#6c7086" stroke-width="1"/>
+
+  <!-- Arrow -->
+  <line x1="380" y1="110" x2="440" y2="110" stroke="#a6e3a1" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- Output -->
+  <rect x="440" y="70" width="130" height="80" rx="8" fill="#313244" stroke="#a6e3a1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="505" y="95" text-anchor="middle" fill="#a6e3a1" font-size="11" font-weight="600">Paquet chiffré</text>
+
+  <!-- Nonce part -->
+  <rect x="445" y="103" width="50" height="40" rx="3" fill="#45475a"/>
+  <text x="470" y="118" text-anchor="middle" fill="#f38ba8" font-size="9">nonce</text>
+  <text x="470" y="133" text-anchor="middle" fill="#f38ba8" font-size="9">12 B</text>
+
+  <!-- Ciphertext part -->
+  <rect x="498" y="103" width="67" height="40" rx="3" fill="#45475a"/>
+  <text x="532" y="118" text-anchor="middle" fill="#89b4fa" font-size="9">ciphertext</text>
+  <text x="532" y="133" text-anchor="middle" fill="#89b4fa" font-size="9">+ GCM tag</text>
+
+  <!-- Bottom note -->
+  <rect x="150" y="220" width="300" height="28" rx="6" fill="#45475a"/>
+  <text x="300" y="239" text-anchor="middle" fill="#cdd6f4" font-size="11">nonce + ciphertext envoyés sur le réseau</text>
+
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#89b4fa"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#a6e3a1"/>
+    </marker>
+  </defs>
+</svg>
