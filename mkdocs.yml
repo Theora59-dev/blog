@@ -1,0 +1,21 @@
+site_name: Theora59-dev Blog
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - content.code.copy
+nav:
+  - Accueil: index.md
+  - À propos: a-propos.md
+  - DVWA: dvwa.md
+  - FFMPEG Commands: cours/ffmpeg-cheatsheet.md
+  - Assembler MIPS: cours/assembler-MIPS.md
+  - Librairie BMP: projets/bmp-image-manager.md
+  - Projet Saturne: projets/simple-planet-gen/index.md
+  - Satisfactorio - Réseau & Chiffrement: projets/satisfactorio-reseau-chiffrement.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
