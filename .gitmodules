@@ -1,7 +1,0 @@
-[submodule "themes/terminus"]
-	path = themes/terminus
-	url = https://github.com/ebkalderon/terminus.git
-[submodule "themes/linkita"]
-	path = themes/linkita
-	url = https://codeberg.org/salif/linkita.git
-	branch = v4
