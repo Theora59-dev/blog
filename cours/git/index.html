@@ -9,21 +9,25 @@
       
       
       
+        <link rel="prev" href="../ffmpeg-cheatsheet/">
+      
+      
+        <link rel="next" href="../assembler-MIPS/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Command Injection - Theora59-dev Blog</title>
+        <title>Git Commands - Theora59-dev Blog</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
@@ -42,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -60,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#command-injection" class="md-skip">
+        <a href="#initialisation" class="md-skip">
           Skip to content
         </a>
       
@@ -76,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Theora59-dev Blog" class="md-header__button md-logo" aria-label="Theora59-dev Blog" data-md-component="logo">
+    <a href="../.." title="Theora59-dev Blog" class="md-header__button md-logo" aria-label="Theora59-dev Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -96,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Command Injection
+              Git Commands
             
           </span>
         </div>
@@ -174,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Theora59-dev Blog" class="md-nav__button md-logo" aria-label="Theora59-dev Blog" data-md-component="logo">
+    <a href="../.." title="Theora59-dev Blog" class="md-nav__button md-logo" aria-label="Theora59-dev Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -192,7 +196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -219,7 +223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../a-propos/" class="md-nav__link">
+      <a href="../../a-propos/" class="md-nav__link">
         
   
   
@@ -246,7 +250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dvwa/" class="md-nav__link">
+      <a href="../../dvwa/" class="md-nav__link">
         
   
   
@@ -273,7 +277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ffmpeg-cheatsheet/" class="md-nav__link">
+      <a href="../ffmpeg-cheatsheet/" class="md-nav__link">
         
   
   
@@ -297,10 +301,35 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../git/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git Commands
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -316,6 +345,90 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initialisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initialisation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etat-et-historique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        État et Historique
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staging-et-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Staging et Commits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fusion (Merge)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#divers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Divers:
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -327,7 +440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../assembler-MIPS/" class="md-nav__link">
+      <a href="../assembler-MIPS/" class="md-nav__link">
         
   
   
@@ -354,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/bmp-image-manager/" class="md-nav__link">
+      <a href="../../projets/bmp-image-manager/" class="md-nav__link">
         
   
   
@@ -381,7 +494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/simple-planet-gen/" class="md-nav__link">
+      <a href="../../projets/simple-planet-gen/" class="md-nav__link">
         
   
   
@@ -408,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/satisfactorio-reseau-chiffrement/" class="md-nav__link">
+      <a href="../../projets/satisfactorio-reseau-chiffrement/" class="md-nav__link">
         
   
   
@@ -445,8 +558,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -455,10 +566,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#easy" class="md-nav__link">
+  <a href="#initialisation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Easy:
+        Initialisation
       
     </span>
   </a>
@@ -466,10 +577,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#medium" class="md-nav__link">
+  <a href="#etat-et-historique" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Medium:
+        État et Historique
       
     </span>
   </a>
@@ -477,10 +588,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#high" class="md-nav__link">
+  <a href="#staging-et-commits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        High:
+        Staging et Commits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fusion (Merge)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#divers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Divers:
       
     </span>
   </a>
@@ -504,24 +648,60 @@
 
 
 
-<h1 id="command-injection">Command Injection</h1>
-<h2 id="easy">Easy:</h2>
-<p>Au niveau Easy, aucune validation n'empêche l'injection directe. La commande PHP exécute ping IP sans filtrage, permettant d'ajouter une seconde commande via des séparateurs shell comme <code>;</code>, <code>&amp;&amp;</code> ou <code>||</code>.</p>
+  <h1>Git Commands</h1>
+
+<blockquote>
+<p>Voici une cheatsheet concise sur l'utilisation de Git, centrée sur les commits, la gestion des branches, les fusions et le rebase. </p>
+</blockquote>
+<h2 id="initialisation">Initialisation</h2>
 <ul>
-<li>Entrez <code>127.0.0.1; whoami</code> pour exécuter <code>ping 127.0.0.1</code> suivi de <code>whoami</code>, affichant l'utilisateur du serveur.</li>
-<li><code>127.0.0.1 &amp;&amp; ls</code> fonctionne si la première commande réussit, listant les fichiers.</li>
-<li>Ces séparateurs chainent les commandes sans restriction.</li>
+<li>
+<p><code>git init</code> : Initialise un nouveau dépôt Git dans le répertoire courant, créant le dossier .git pour stocker l'historique et la configuration. Utile pour démarrer un projet local.</p>
+</li>
+<li>
+<p><code>git clone &lt;URL&gt;</code> : Crée une copie locale complète d'un dépôt distant, y compris tout l'historique. Idéal pour récupérer un projet existant.</p>
+</li>
 </ul>
-<h2 id="medium">Medium:</h2>
-<p>DVWA applique un blacklistage basique via <code>str_replace</code>, supprimant <code>;</code>, <code>&amp;&amp;</code> et <code>||</code> en remplaçant par des espaces vides, rendant les injections classiques inefficaces
-- Testez <code>127.0.0.1 || whoami</code> : le double pipe <code>||</code> exécute la seconde commande seulement si la première échoue, contournant partiellement le filtre car <code>||</code> n'est pas toujours bloqué immédiatement.
-- Si <code>||</code> est filtré, essayez le pipe simple <code>|</code> pour forcer l'exécution conditionnelle.
-- Une IP invalide comme <code>999.999.999.999 || id</code> déclenche l'échec du <code>ping</code>, exécutant <code>id</code>.</p>
-<h2 id="high">High:</h2>
-<p>Les filtres s'intensifient : espaces interdits, whitespaces remplacés, et extension de la blacklist aux séparateurs courants, bloquant les injections en une ligne.</p>
+<h2 id="etat-et-historique">État et Historique</h2>
 <ul>
-<li>Solution experimentale: Faire passer la requête par un Proxy (BurpSuite) et insérer un saut de ligne dans le champ vulnérable 
-<img alt="" src="" title="Command Injection illustration.png" /></li>
+<li>
+<p><code>git status</code> : Affiche l'état actuel du dépôt : fichiers modifiés, ajoutés au staging (index) ou prêts à commiter.</p>
+</li>
+<li>
+<p><code>git log</code> Montre l'historique des commits (auteur, date, message).</p>
+</li>
+<li><code>git log --oneline</code> : Version compacte (un commit par ligne).</li>
+<li><code>git log -n 3</code> : Limite aux 3 derniers commits.</li>
+<li><code>git log --graph</code> : Vue graphique des branches.</li>
+</ul>
+<h2 id="staging-et-commits">Staging et Commits</h2>
+<ul>
+<li><code>git add &lt;fichier&gt;</code> ou <code>git add .</code> : Ajoute les modifications au staging area (index), préparant les fichiers pour un commit. <code>git add .</code> ajoute tout - utile pour sélectionner précisément ce qui sera validé.</li>
+<li><code>git commit -m "Message"</code> : Valide les changements du staging avec un message descriptif, créant un snapshot permanent dans l'historique. Le message explique "quoi" et "pourquoi".</li>
+<li><code>git commit --amend</code> : Modifie le dernier commit (ajoute des fichiers oubliés ou corrige le message). Utile pour des ajustements rapides sans polluer l'historique.</li>
+</ul>
+<h2 id="branches">Branches</h2>
+<ul>
+<li><code>git branch</code> : Liste les branches locales.</li>
+<li><code>git branch -a</code> : Inclut les branches locales et distantes (après git fetch).</li>
+<li><code>git branch &lt;nom&gt;</code> : Crée une branche sans changer.</li>
+<li><code>git branch -d &lt;nom&gt;</code> : Supprime une branche fusionnée (sûr).</li>
+<li><code>git checkout &lt;branche&gt;</code> : Bascule vers une branche existante, mettant à jour les fichiers de travail.</li>
+<li><code>git checkout -b &lt;nom&gt;</code> : Crée et bascule sur une nouvelle branche (moderne : <code>git switch -c &lt;nom&gt;</code>). Permet d'isoler des développements sans affecter la branche principale.</li>
+</ul>
+<h2 id="fusion-merge">Fusion (Merge)</h2>
+<ul>
+<li><code>git merge &lt;branche&gt;</code> : Intègre les commits d'une branche dans la branche courante, créant un commit de fusion si divergence. Utile pour combiner des features terminées (gère les conflits manuellement).</li>
+<li><code>git merge --abort</code> : Annule une fusion en cours (ex. : conflit non résolu). Sauvegarder en cas de problème.
+Rebase</li>
+<li><code>git rebase &lt;branche&gt;</code> : Déplace les commits de la branche courante "au-dessus" de la cible, créant un historique linéaire (pas de commit de fusion). Idéal pour un historique propre avant de merger sur main.</li>
+<li><code>git rebase -i HEAD~3</code> : Rebase interactif sur les 3 derniers commits : réorganise, édite, squash ou drop. Puissant pour nettoyer l'historique.</li>
+<li><code>git rebase --abort</code> / <code>git rebase --continue</code> : Annule ou reprend un rebase après résolution de conflits. Gère les interruptions.</li>
+</ul>
+<h2 id="divers">Divers:</h2>
+<ul>
+<li><code>git diff</code> : Voir les changements non stagés. <code>git diff --staged</code> : Différences prêtes à commit.</li>
+<li><code>git stash</code> : Sauvegarde temporaire des changements non commit. <code>git stash apply</code> : Les restaures.</li>
 </ul>
 
 
@@ -572,10 +752,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
