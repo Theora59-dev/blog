@@ -9,6 +9,7 @@ nav:
   - À propos: a-propos.md
   - DVWA: dvwa.md
   - FFMPEG Commands: cours/ffmpeg-cheatsheet.md
+  - Git Commands: cours/git.md
   - Assembler MIPS: cours/assembler-MIPS.md
   - Librairie BMP: projets/bmp-image-manager.md
   - Projet Saturne: projets/simple-planet-gen/index.md

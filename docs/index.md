@@ -11,6 +11,7 @@ Bonne lecture !
 
 ## Contenu qui pourrait vous intéresser:
 - [Vulnérabilités web & DVWA](./dvwa.md)
+- [Cheatsheet des commandes GIT](./cours/git.md)
 - [Cheatsheet FFMPEG](./cours/ffmpeg-cheatsheet.md)
 - [Cheatsheet ASM MIPS pour le reverse](./cours/assembler-MIPS.md)
 - [Projet Saturne](./projets/simple-planet-gen/index.md)
