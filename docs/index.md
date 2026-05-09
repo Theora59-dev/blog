@@ -17,3 +17,4 @@ Bonne lecture !
 - [Projet Saturne](./projets/simple-planet-gen/index.md)
 - [Librairie de gestion d'image BMP](./projets/bmp-image-manager.md) (Utilisé dans le projet Saturne)
 - [Satisfactorio - Connexions et chiffrement](./projets/satisfactorio-reseau-chiffrement.md)
+- [La gestion d'erreurs en Rust](./cours/rust-errors.md)
