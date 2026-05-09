@@ -1,0 +1,1321 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../projets/satisfactorio-reseau-chiffrement/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>La gestion d'erreurs en Rust - Theora59-dev Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#la-gestion-derreurs-en-rust" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Theora59-dev Blog" class="md-header__button md-logo" aria-label="Theora59-dev Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Theora59-dev Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              La gestion d'erreurs en Rust
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Theora59-dev Blog" class="md-nav__button md-logo" aria-label="Theora59-dev Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Theora59-dev Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a-propos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À propos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dvwa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DVWA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg-cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FFMPEG Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assembler-MIPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assembler MIPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/bmp-image-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librairie BMP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/simple-planet-gen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projet Saturne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/satisfactorio-reseau-chiffrement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Satisfactorio - Réseau & Chiffrement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La gestion d'erreurs en Rust
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La gestion d'erreurs en Rust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#optiont" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option\&lt;T>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option\&lt;T&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Création
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-if-let" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Match / if let
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methodes-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodes principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultt-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result\&lt;T, E>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Result\&lt;T, E&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creationtheora59theora59-b550m-hdvprojetsblog-mkdocs-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Créationtheora59@theora59-B550M-HDV:~/Projets/Blog$ mkdocs serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-if-let_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Match / if let
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methodes-principales_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodes principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinators_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loperateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'opérateur ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creer-ses-propres-erreurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Créer ses propres erreurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer ses propres erreurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erreur-simple-type-enumere-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreur simple (type énuméré + Display)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erreur-avec-cause-wrapping-derreurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreur avec cause (wrapping d'erreurs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-pour-conversion-automatique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From pour conversion automatique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thiserror-crate-recommande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        thiserror (crate — recommandé)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bonnes pratiques
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#optiont" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option\&lt;T>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option\&lt;T&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Création
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-if-let" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Match / if let
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methodes-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodes principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultt-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result\&lt;T, E>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Result\&lt;T, E&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creationtheora59theora59-b550m-hdvprojetsblog-mkdocs-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Créationtheora59@theora59-B550M-HDV:~/Projets/Blog$ mkdocs serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-if-let_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Match / if let
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methodes-principales_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodes principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinators_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loperateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'opérateur ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creer-ses-propres-erreurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Créer ses propres erreurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer ses propres erreurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erreur-simple-type-enumere-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreur simple (type énuméré + Display)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erreur-avec-cause-wrapping-derreurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreur avec cause (wrapping d'erreurs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-pour-conversion-automatique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From pour conversion automatique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thiserror-crate-recommande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        thiserror (crate — recommandé)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bonnes pratiques
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="la-gestion-derreurs-en-rust">La gestion d'erreurs en Rust</h1>
+<h2 id="optiont">Option\&lt;T&gt;</h2>
+<p><code>Option&lt;T&gt;</code> représente une valeur qui peut être présente (<code>Some(T)</code>) ou absente (<code>None</code>).</p>
+<h3 id="creation">Création</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">some_val</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">none_val</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="match-if-let">Match / if let</h3>
+<div class="highlight"><pre><span></span><code><span class="k">match</span><span class="w"> </span><span class="n">some_val</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">Some</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">),</span>
+<span class="w">    </span><span class="nb">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;rien&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_val</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="methodes-principales">Méthodes principales</h3>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unwrap()</code></td>
+<td>Panique si <code>None</code></td>
+</tr>
+<tr>
+<td><code>expect("msg")</code></td>
+<td>Panique avec message si <code>None</code></td>
+</tr>
+<tr>
+<td><code>unwrap_or(default)</code></td>
+<td>Valeur par défaut si <code>None</code></td>
+</tr>
+<tr>
+<td><code>unwrap_or_else(fn)</code></td>
+<td>Appelle une fonction si <code>None</code></td>
+</tr>
+<tr>
+<td><code>is_some()</code></td>
+<td><code>true</code> si <code>Some</code></td>
+</tr>
+<tr>
+<td><code>is_none()</code></td>
+<td><code>true</code> si <code>None</code></td>
+</tr>
+<tr>
+<td><code>ok_or(err)</code></td>
+<td>Convertit en <code>Result</code> (<code>None</code> → <code>Err(err)</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="combinators">Combinators</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// map — transforme la valeur intérieure si Some</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">            </span><span class="c1">// Some(10)</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">b</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">  </span><span class="c1">// None</span>
+
+<span class="c1">// and_then — chaîne d&#39;options (flat_map)</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">and_then</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// Some(10)</span>
+
+<span class="c1">// filter — garde Some si condition vraie</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">42</span><span class="p">).</span><span class="n">filter</span><span class="p">(</span><span class="o">|&amp;</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">      </span><span class="c1">// Some(42)</span>
+
+<span class="c1">// or / or_else — fallback si None</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">.</span><span class="n">or</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w">                   </span><span class="c1">// Some(0)</span>
+
+<span class="c1">// get_or_insert — insère si None, retourne ref</span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span>
+<span class="n">f</span><span class="p">.</span><span class="n">get_or_insert</span><span class="p">(</span><span class="mi">99</span><span class="p">);</span><span class="w">                        </span><span class="c1">// maintenant Some(99)</span>
+
+<span class="c1">// take — remplace par None, retourne l&#39;ancienne valeur</span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">take</span><span class="p">();</span><span class="w">                           </span><span class="c1">// h = Some(5), g = None</span>
+
+<span class="c1">// replace — remplace par une nouvelle valeur</span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w">                      </span><span class="c1">// j = Some(3), i = Some(42)</span>
+</code></pre></div>
+<h2 id="resultt-e">Result\&lt;T, E&gt;</h2>
+<p><code>Result&lt;T, E&gt;</code> représente une opération qui peut réussir (<code>Ok(T)</code>) ou échouer (<code>Err(E)</code>).</p>
+<h3 id="creationtheora59theora59-b550m-hdvprojetsblog-mkdocs-serve">Créationtheora59@theora59-B550M-HDV:~/Projets/Blog$ mkdocs serve</h3>
+<p>ERROR   -  Config value 'theme': Unrecognised theme name: 'material'. The
+           available installed themes are: mkdocs, readthedocs
+ERROR   -  Config value 'markdown_extensions': Failed to load extension
+           'pymdownx.highlight'.
+           ModuleNotFoundError: No module named 'pymdownx'</p>
+<p>Aborted with 2 configuration errors!
+theora59@theora59-B550M-HDV:~/Projets/Blog$ mkdocs serve </p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">ok</span>: <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">err</span>: <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;échec&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="match-if-let_1">Match / if let</h3>
+<div class="highlight"><pre><span></span><code><span class="k">match</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">),</span>
+<span class="w">    </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">eprintln!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="methodes-principales_1">Méthodes principales</h3>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unwrap()</code></td>
+<td>Panique si <code>Err</code></td>
+</tr>
+<tr>
+<td><code>expect("msg")</code></td>
+<td>Panique avec message si <code>Err</code></td>
+</tr>
+<tr>
+<td><code>unwrap_or(default)</code></td>
+<td>Valeur par défaut si <code>Err</code></td>
+</tr>
+<tr>
+<td><code>unwrap_or_else(fn)</code></td>
+<td>Appelle une fonction si <code>Err</code></td>
+</tr>
+<tr>
+<td><code>is_ok()</code> / <code>is_err()</code></td>
+<td>Teste le variant</td>
+</tr>
+<tr>
+<td><code>ok()</code></td>
+<td>Convertit en <code>Option</code> (<code>Err</code> → <code>None</code>)</td>
+</tr>
+<tr>
+<td><code>err()</code></td>
+<td>Convertit en <code>Option&lt;Err&gt;</code> (<code>Ok</code> → <code>None</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="combinators_1">Combinators</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// map — transforme Ok</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">a</span>: <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">   </span><span class="c1">// Ok(10)</span>
+
+<span class="c1">// map_err — transforme Err</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">b</span>: <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">).</span><span class="n">map_err</span><span class="p">(</span><span class="o">|</span><span class="n">e</span><span class="o">|</span><span class="w"> </span><span class="fm">format!</span><span class="p">(</span><span class="s">&quot;err: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">));</span>
+
+<span class="c1">// and_then — chaîne (flat_map)</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">and_then</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span><span class="w">              </span><span class="c1">// Ok(10)</span>
+
+<span class="c1">// or_else — fallback si Err</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;echec&quot;</span><span class="p">).</span><span class="n">or_else</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w">            </span><span class="c1">// Ok(0)</span>
+
+<span class="c1">// unwrap_or_else — défaut via closure</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;echec&quot;</span><span class="p">).</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span><span class="w">         </span><span class="c1">// 42</span>
+
+<span class="c1">// map_or — valeur par défaut + transformation</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">map_or</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">                 </span><span class="c1">// 10</span>
+
+<span class="c1">// map_or_else — deux closures</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;echec&quot;</span><span class="p">).</span><span class="n">map_or_else</span><span class="p">(</span><span class="o">|</span><span class="n">e</span><span class="o">|</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">len</span><span class="p">(),</span><span class="w"> </span><span class="o">|</span><span class="n">x</span>: <span class="kt">i32</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="loperateur">L'opérateur <code>?</code></h2>
+<p>Propagation d'erreur : retourne <code>Err</code> immédiatement si <code>Result</code> est <code>Err</code>, ou <code>None</code> si <code>Option</code> est <code>None</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fs</span>::<span class="n">File</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span>::<span class="n">Read</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span>::<span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">      </span><span class="c1">// si Err, return Err immédiatement</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span>
+<span class="w">    </span><span class="n">f</span><span class="p">.</span><span class="n">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">get_first</span><span class="p">(</span><span class="n">items</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">i32</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;&amp;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">first</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">         </span><span class="c1">// si None, return None</span>
+<span class="w">    </span><span class="nb">Some</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Attention :</strong> <code>?</code> dans une <code>main()</code> nécessite un type de retour <code>Result</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_file</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="creer-ses-propres-erreurs">Créer ses propres erreurs</h2>
+<h3 id="erreur-simple-type-enumere-display">Erreur simple (type énuméré + Display)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fmt</span><span class="p">;</span>
+
+<span class="cp">#[derive(Debug)]</span>
+<span class="k">enum</span> <span class="nc">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">FichierIntrouvable</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PermissionRefusee</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ValeurInvalide</span><span class="p">(</span><span class="nb">String</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Display</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">f</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Formatter</span><span class="o">&lt;&#39;</span><span class="nb">_</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">fmt</span>::<span class="nb">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MonErreur</span>::<span class="n">FichierIntrouvable</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">write!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fichier introuvable&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">MonErreur</span>::<span class="n">PermissionRefusee</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">write!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;permission refusée&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">MonErreur</span>::<span class="n">ValeurInvalide</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">write!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;valeur invalide: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">),</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MonErreur</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// trait bound</span>
+</code></pre></div>
+<h3 id="erreur-avec-cause-wrapping-derreurs">Erreur avec cause (wrapping d'erreurs)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fmt</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="p">;</span>
+
+<span class="cp">#[derive(Debug)]</span>
+<span class="k">struct</span> <span class="nc">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">message</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">source</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Display</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">f</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Formatter</span><span class="o">&lt;&#39;</span><span class="nb">_</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">fmt</span>::<span class="nb">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="fm">write!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">message</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">source</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;&amp;</span><span class="p">(</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">source</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">e</span><span class="o">|</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">as_ref</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="from-pour-conversion-automatique"><code>From</code> pour conversion automatique</h3>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="nb">From</span><span class="o">&lt;</span><span class="n">io</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">from</span><span class="p">(</span><span class="n">err</span>: <span class="nc">io</span>::<span class="n">Error</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">message</span>: <span class="nc">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;erreur IO: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">),</span>
+<span class="w">            </span><span class="n">source</span>: <span class="nb">Some</span><span class="p">(</span><span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="n">err</span><span class="p">)),</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Permet d'utiliser <code>?</code> avec <code>io::Error</code> dans des fonctions retournant <code>MonErreur</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">lire</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">MonErreur</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span>::<span class="n">fs</span>::<span class="n">read_to_string</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">  </span><span class="c1">// io::Error → MonErreur auto</span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="thiserror-crate-recommande"><code>thiserror</code> (crate — recommandé)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">thiserror</span>::<span class="n">Error</span><span class="p">;</span>
+
+<span class="cp">#[derive(Error, Debug)]</span>
+<span class="k">enum</span> <span class="nc">MonErreur</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[error(</span><span class="s">&quot;fichier introuvable&quot;</span><span class="cp">)]</span>
+<span class="w">    </span><span class="n">FichierIntrouvable</span><span class="p">,</span>
+
+<span class="w">    </span><span class="cp">#[error(</span><span class="s">&quot;permission refusée: {0}&quot;</span><span class="cp">)]</span>
+<span class="w">    </span><span class="n">PermissionRefusée</span><span class="p">(</span><span class="nb">String</span><span class="p">),</span>
+
+<span class="w">    </span><span class="cp">#[error(</span><span class="s">&quot;erreur IO: {0}&quot;</span><span class="cp">)]</span>
+<span class="w">    </span><span class="n">Io</span><span class="p">(</span><span class="cp">#[from]</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span>::<span class="n">Error</span><span class="p">),</span><span class="w">  </span><span class="c1">// From + Display auto</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="bonnes-pratiques">Bonnes pratiques</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Approche</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prototypage / scripts</td>
+<td><code>unwrap()</code>, <code>expect()</code></td>
+</tr>
+<tr>
+<td>Propagation simple</td>
+<td><code>?</code></td>
+</tr>
+<tr>
+<td>App / CLI</td>
+<td><code>anyhow::Result</code></td>
+</tr>
+<tr>
+<td>Bibliothèque / production</td>
+<td>Énumération d'erreur personnalisée</td>
+</tr>
+<tr>
+<td>Erreurs complexes en bibliothèque</td>
+<td><code>thiserror</code></td>
+</tr>
+<tr>
+<td>Conversion Option → Result</td>
+<td><code>ok_or()</code> / <code>ok_or_else()</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
