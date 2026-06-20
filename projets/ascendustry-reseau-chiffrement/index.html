@@ -23,7 +23,7 @@
     
     
       
-        <title>Satisfactorio - Réseau & Chiffrement - Theora59-dev Blog</title>
+        <title>Ascendustry - Réseau & Chiffrement - Theora59-dev Blog</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#satisfactorio-comment-le-reseau-fonctionne-en-interne" class="md-skip">
+        <a href="#ascendustry-comment-le-reseau-fonctionne-en-interne" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Satisfactorio - Réseau & Chiffrement
+              Ascendustry - Réseau & Chiffrement
             
           </span>
         </div>
@@ -428,7 +428,7 @@
   <span class="md-ellipsis">
     
   
-    Satisfactorio - Réseau & Chiffrement
+    Ascendustry - Réseau & Chiffrement
   
 
     
@@ -446,7 +446,7 @@
   <span class="md-ellipsis">
     
   
-    Satisfactorio - Réseau & Chiffrement
+    Ascendustry - Réseau & Chiffrement
   
 
     
@@ -791,19 +791,19 @@
 
 
 
-<h1 id="satisfactorio-comment-le-reseau-fonctionne-en-interne">Satisfactorio - Comment le réseau fonctionne en interne</h1>
+<h1 id="ascendustry-comment-le-reseau-fonctionne-en-interne">Ascendustry - Comment le réseau fonctionne en interne</h1>
 <blockquote>
 <p>Posté le 6 mai 2026</p>
 </blockquote>
-<p>J'ai récemment travaillé sur <strong>Satisfactorio</strong>, une ébauche de jeu voxel multijoueur en Rust développé from scratch avec <a href="https://github.com/strachydev">@StrachyDev</a>. Le projet ayant atteint un stade très correct de maturité, j'ai souhaité vous faire part de l'architecture et du système réseau que j'ai implémenté pour relier le client et le serveur. (Ça me permettra aussi d'avoir une trace du système et son évolution pour la suite du projet)</p>
-<p><img alt="Architecture globale" src="../../assets/images/satisfactorio/architecture.svg" /></p>
+<p>J'ai récemment travaillé sur <strong>Ascendustry</strong>, une ébauche de jeu voxel multijoueur en Rust développé from scratch avec <a href="https://github.com/strachydev">@StrachyDev</a>. Le projet ayant atteint un stade très correct de maturité, j'ai souhaité vous faire part de l'architecture et du système réseau que j'ai implémenté pour relier le client et le serveur. (Ça me permettra aussi d'avoir une trace du système et son évolution pour la suite du projet)</p>
+<p><img alt="Architecture globale" src="../../assets/images/ascendustry/architecture.svg" /></p>
 <hr />
 <h2 id="les-bases">Les bases</h2>
 <p>Le jeu tourne en TCP avec Tokio pour l'asynchrone et <code>bincode</code> pour la sérialisation. Le serveur écoute par défaut sur <code>127.0.0.1:42677</code>, et chaque connexion entrante se voit attribuer sa propre tâche tokio.</p>
-<p><img alt="Flux de connexion serveur" src="../../assets/images/satisfactorio/flux-connexion.svg" /></p>
+<p><img alt="Flux de connexion serveur" src="../../assets/images/ascendustry/flux-connexion.svg" /></p>
 <hr />
 <h2 id="format-dun-paquet-sur-le-reseau">Format d'un paquet sur le réseau</h2>
-<p><img alt="Format d'un paquet" src="../../assets/images/satisfactorio/format-paquet.svg" /></p>
+<p><img alt="Format d'un paquet" src="../../assets/images/ascendustry/format-paquet.svg" /></p>
 <p>Taille max : <strong>64 Ko</strong>. Les types de paquets couvrent les besoins classiques d'un jeu :</p>
 <div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">TypePaquet</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Handshake</span><span class="p">,</span><span class="w"> </span><span class="n">HandshakeAck</span><span class="p">,</span>
@@ -815,7 +815,7 @@
 <hr />
 <h2 id="le-handshake">Le handshake</h2>
 <p>C'est la partie la plus intéressante. Voici comment client et serveur établissent la connexion :</p>
-<p><img alt="Diagramme de séquence du handshake" src="../../assets/images/satisfactorio/handshake.svg" /></p>
+<p><img alt="Diagramme de séquence du handshake" src="../../assets/images/ascendustry/handshake.svg" /></p>
 <ol>
 <li>Le serveur génère un <code>server_id</code> de 16 bytes via <code>getrandom</code> (CSPRNG) et l'envoie au client</li>
 <li>Le client dérive une clé de 32 bytes avec SHA-256 : <code>hash(server_id + SALT + token)</code></li>
@@ -826,17 +826,17 @@
 <hr />
 <h2 id="larchitecture-async-cote-client">L'architecture async côté client</h2>
 <p>Après le handshake, deux tâches tournent en background :</p>
-<p><img alt="Architecture async client" src="../../assets/images/satisfactorio/async-client.svg" /></p>
+<p><img alt="Architecture async client" src="../../assets/images/ascendustry/async-client.svg" /></p>
 <ul>
 <li><strong>Sender Task</strong> — Lit depuis un canal <code>mpsc</code> et écrit sur le TCP stream. Un seul writer évite la corruption des données par écritures concurrentes.</li>
 <li><strong>Receiver Task</strong> — Lit en continu depuis le stream et pousse les paquets dans un canal. Le game loop principal n'est jamais bloqué.</li>
 </ul>
 <p>Côté serveur, chaque client a sa task dédiée et les positions sont broadcastées à <strong>100 Hz</strong>.</p>
-<p><img alt="Broadcast des positions" src="../../assets/images/satisfactorio/broadcast.svg" /></p>
+<p><img alt="Broadcast des positions" src="../../assets/images/ascendustry/broadcast.svg" /></p>
 <hr />
 <h2 id="le-chiffrement-aes-256-gcm">Le chiffrement AES-256-GCM</h2>
 <h3 id="derivation-de-la-cle">Dérivation de la clé</h3>
-<p><img alt="Dérivation de la clé secrète" src="../../assets/images/satisfactorio/derivation-cle.svg" /></p>
+<p><img alt="Dérivation de la clé secrète" src="../../assets/images/ascendustry/derivation-cle.svg" /></p>
 <div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">compute_shared_secret</span><span class="p">(</span><span class="n">server_id</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">token</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">hasher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sha256</span>::<span class="n">new</span><span class="p">();</span>
 <span class="w">    </span><span class="n">hasher</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">server_id</span><span class="p">);</span>
@@ -847,7 +847,7 @@
 </code></pre></div>
 <p>Client et serveur dérivent la même clé indépendamment grâce au <code>server_id</code>. C'est un schéma de type <strong>pre-shared key</strong> basé sur un challenge.</p>
 <h3 id="chiffrement">Chiffrement</h3>
-<p><img alt="Chiffrement AES-256-GCM" src="../../assets/images/satisfactorio/chiffrement.svg" /></p>
+<p><img alt="Chiffrement AES-256-GCM" src="../../assets/images/ascendustry/chiffrement.svg" /></p>
 <div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">aes_encrypt</span><span class="p">(</span><span class="n">data</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">cipher</span>: <span class="kp">&amp;</span><span class="nc">Aes256Gcm</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">nonce_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">12</span><span class="p">];</span>
 <span class="w">    </span><span class="n">OsRng</span><span class="p">.</span><span class="n">fill_bytes</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">nonce_bytes</span><span class="p">);</span>
@@ -861,8 +861,8 @@
 <p>Chaque paquet est chiffré avec un <strong>nonce aléatoire de 12 bytes</strong> généré par <code>OsRng</code>. Le nonce est préfixé au ciphertext pour que le récepteur puisse déchiffrer. AES-256-GCM fournit chiffrement <strong>et</strong> authentification (MAC intégré).</p>
 <hr />
 <h2 id="en-resume">En résumé</h2>
-<p><img alt="Récapitulatif global" src="../../assets/images/satisfactorio/recap.svg" /></p>
-<p>Satisfactorio a une base réseau propre : Tokio pour l'async, des channels mpsc pour séparer reading/writing, et AES-256-GCM pour chiffrer les échanges.</p>
+<p><img alt="Récapitulatif global" src="../../assets/images/ascendustry/recap.svg" /></p>
+<p>Ascendustry a une base réseau propre : Tokio pour l'async, des channels mpsc pour séparer reading/writing, et AES-256-GCM pour chiffrer les échanges.</p>
 
 
 
