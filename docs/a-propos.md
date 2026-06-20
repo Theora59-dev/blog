@@ -33,7 +33,6 @@ Développeur **Rust / Python**, passionné par le bas niveau, les systèmes emba
 
 - **Blog :** [theora59-dev.github.io/blog](https://theora59-dev.github.io/blog/)
 - **GitHub :** [@theora59-dev](https://github.com/theora59-dev)
-- **Email :** `theora59 [at] proton [dot] me`
 
 ---
 
