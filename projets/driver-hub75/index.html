@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../cours/assembler-MIPS/">
+        <link rel="prev" href="../ascendustry-avancees/">
       
       
-        <link rel="next" href="../simple-planet-gen/">
+        <link rel="next" href="../../cours/rust-errors/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Librairie BMP - Theora59-dev Blog</title>
+        <title>Driver HUB75 pour matrice LED - Theora59-dev Blog</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gestionnaire-dimage-bmp" class="md-skip">
+        <a href="#driver-hub75-pour-matrice-6464-bit-bang-sur-esp32" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Librairie BMP
+              Driver HUB75 pour matrice LED
             
           </span>
         </div>
@@ -355,37 +355,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Librairie BMP
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../bmp-image-manager/" class="md-nav__link">
         
   
   
@@ -401,92 +374,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#presentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Présentation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonction-principale-exposee" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonction principale exposée
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exemple-dutilisation-en-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exemple d'utilisation en C
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compilation-et-execution" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compilation et exécution
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonctionnement-interne" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonctionnement interne
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#licence-mit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Licence MIT
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -576,10 +463,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../driver-hub75/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Driver HUB75 pour matrice LED
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -595,6 +509,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comment-ca-fonctionne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comment ça fonctionne
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comment ça fonctionne">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-les-signaux-bas-niveau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Les signaux bas niveau
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-le-framebuffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Le framebuffer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-laffichage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. L'affichage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemple-du-moteur-3d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple du Moteur 3D
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infos-supplementaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infos Supplémentaires
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -653,10 +659,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#presentation" class="md-nav__link">
+  <a href="#comment-ca-fonctionne" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Présentation
+        Comment ça fonctionne
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comment ça fonctionne">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-les-signaux-bas-niveau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Les signaux bas niveau
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-le-framebuffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Le framebuffer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-laffichage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. L'affichage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemple-du-moteur-3d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple du Moteur 3D
       
     </span>
   </a>
@@ -664,54 +720,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fonction-principale-exposee" class="md-nav__link">
+  <a href="#infos-supplementaires" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fonction principale exposée
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exemple-dutilisation-en-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exemple d'utilisation en C
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compilation-et-execution" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compilation et exécution
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonctionnement-interne" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonctionnement interne
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#licence-mit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Licence MIT
+        Infos Supplémentaires
       
     </span>
   </a>
@@ -735,90 +747,66 @@
 
 
 
-<p>+++
-title = "FFI Rust/C - Image BMP"
-date = 2025-12-13
-categories = ["rust"]
-description = "Librairie partagée de création d'image BMP"</p>
-<p>[taxonomies]
-tags = ["Graphique", "Rust", "C", "Librairie"]
-+++</p>
-<h1 id="gestionnaire-dimage-bmp">Gestionnaire d'image BMP</h1>
-<p>Bibliothèque Rust pour créer et sauvegarder des images BMP à partir d'une matrice RGBA passée via FFI C.</p>
+<h1 id="driver-hub75-pour-matrice-6464-bit-bang-sur-esp32">Driver HUB75 pour matrice 64×64 — Bit-bang sur ESP32</h1>
+<blockquote>
+<p>Posté le 15 juin 2026</p>
+</blockquote>
+<p><img alt="Schéma de cablage ESP32 ↔ HUB75" src="../../assets/images/driver-hub75/matrix.svg" /></p>
+<p>J'ai écrit un driver en Rust pour piloter une matrice de LEDs <strong>HUB75 64×64</strong> avec un <strong>ESP32</strong>. Pas de module spécial, pas de librairie externe — juste des broches GPIO qu'on contrôle directement.</p>
+<p>Le code est ici : <a href="https://github.com/Theora59-dev/driver-hub75-64x64-pixel-matrix">github.com/Theora59-dev/driver-hub75-64x64-pixel-matrix</a></p>
 <hr />
-<h2 id="presentation">Présentation</h2>
-<p>Cette bibliothèque Rust permet de créer une image BMP à partir d'une matrice de pixels au format RGBA reçue depuis un programme en C. Elle expose une fonction compatible C via FFI (Foreign Function Interface) pour faciliter l'interopérabilité.</p>
-<hr />
-<h2 id="fonction-principale-exposee">Fonction principale exposée</h2>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">write_bmp_from_rgba_matrix</span><span class="p">(</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">rgba_matrix</span><span class="p">,</span>
-<span class="kt">uint32_t</span><span class="w"> </span><span class="n">width</span><span class="p">,</span>
-<span class="kt">uint32_t</span><span class="w"> </span><span class="n">height</span><span class="p">,</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">file_path</span>
-<span class="p">);</span>
-</code></pre></div>
+<h2 id="comment-ca-fonctionne">Comment ça fonctionne</h2>
+<p>Le driver a trois parties :</p>
+<h3 id="1-les-signaux-bas-niveau">1. Les signaux bas niveau</h3>
+<p>14 broches GPIO sont utilisées :</p>
 <ul>
-<li><strong>rgba_matrix</strong> : Pointeur vers un tableau plat d'octets représentant les pixels RGBA (largeur × hauteur × 4 octets).</li>
-<li><strong>width</strong> : Largeur de l'image en pixels.</li>
-<li><strong>height</strong> : Hauteur de l'image en pixels.</li>
-<li><strong>file_path</strong> : Chemin du fichier BMP où sauvegarder l'image (chaîne C terminée par zéro).</li>
-<li><strong>retour</strong> : 0 en cas de succès, -1 en cas d'erreur.</li>
+<li><strong>6 pour les données</strong> : R1, G1, B1 (moitié haute) + R2, G2, B2 (moitié basse)</li>
+<li><strong>5 pour l'adresse</strong> : A, B, C, D, E (choisir la rangée)</li>
+<li><strong>3 pour le contrôle</strong> : CLK (horloge), LAT (verrouillage), OE (allumer/éteindre)</li>
 </ul>
-<hr />
-<h2 id="exemple-dutilisation-en-c">Exemple d'utilisation en C</h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;bmp_image_manager.h&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<span class="kt">uint8_t</span><span class="w"> </span><span class="n">rgba_matrix</span><span class="p">[</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">];</span>
-
-<span class="n">text</span>
-<span class="c1">// Remplir la matrice avec du rouge opaque</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">rgba_matrix</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
-<span class="w">    </span><span class="n">rgba_matrix</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="n">rgba_matrix</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="n">rgba_matrix</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
-<span class="p">}</span>
-
-<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;./image.bmp&quot;</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">write_bmp_from_rgba_matrix</span><span class="p">(</span><span class="n">rgba_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">file_path</span><span class="p">);</span>
-
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Image bmp créée avec succès.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Erreur lors de la création de l&#39;image bmp.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
-
+<p>Le timing se fait avec des petites boucles d'attente. L'ESP32 tourne à 240 MHz, ça suffit :</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">pulse_clk</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">clk</span><span class="p">.</span><span class="n">set_high</span><span class="p">();</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">delay_spin</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">clk</span><span class="p">.</span><span class="n">set_low</span><span class="p">();</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">delay_spin</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<hr />
-<h2 id="compilation-et-execution">Compilation et exécution</h2>
-<p>Compiler le binaire C en le liant avec la bibliothèque Rust :
-<div class="highlight"><pre><span></span><code>gcc<span class="w"> </span>votreprogramme.c<span class="w"> </span>-Lchemin_vers_le_dossier_contenant<span class="w"> </span>-lnom_du_fichier<span class="w"> </span>-o<span class="w"> </span>nom_de_lexecutable<span class="sb">`</span>
+<h3 id="2-le-framebuffer">2. Le framebuffer</h3>
+<p>Les pixels sont stockés dans un tableau 2D. La taille de la matrice est définie à la compilation, pas de mémoire allouée dynamiquement :</p>
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">PixelMap</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">W</span>: <span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">H</span>: <span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pixels</span>: <span class="p">[[</span><span class="n">Rgb565</span><span class="p">;</span><span class="w"> </span><span class="n">W</span><span class="p">];</span><span class="w"> </span><span class="n">H</span><span class="p">],</span>
+<span class="p">}</span>
 </code></pre></div>
-Exemple: <code>gcc main.c -Lbmp_image_manager/target/release/ -lbmp_image_manager -o main</code></p>
-<p>Exécuter en précisant la variable d'environnement pour trouver la librairie dynamique :
-- Sous linux: 
-<div class="highlight"><pre><span></span><code><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>chemin_vers_la_librairie<span class="w"> </span>./nom_de_lexecutable
-</code></pre></div>
-- Par exemple:  <code>LD_LIBRARY_PATH=./bmp_image_manager/target/release ./main</code></p>
+<p>Chaque pixel est codé sur 16 bits (rouge/vert/bleu), mais la matrice ne sait afficher que allumé ou éteint par couleur. Du coup on convertit : chaque composante devient soit 0 soit 1. Ça donne 8 couleurs possibles.</p>
+<h3 id="3-laffichage">3. L'affichage</h3>
+<p>L'écran est balayé ligne par ligne très rapidement (persistance de vision). Pour chaque paire de rangées :</p>
+<ol>
+<li>On éteint les LEDs</li>
+<li>On choisit la rangée</li>
+<li>On envoie les pixels colonne par colonne</li>
+<li>On verrouille les données</li>
+<li>On rallume les LEDs un petit moment</li>
+</ol>
+<p>Les 64 rangées défilent assez vite pour qu'on voie l'image complète.</p>
 <hr />
-<h2 id="fonctionnement-interne">Fonctionnement interne</h2>
+<h2 id="exemple-du-moteur-3d">Exemple du Moteur 3D</h2>
+<p>L'exemple le plus cool fait tourner un triangle en 3D directement sur l'ESP32. Le code fait les calculs de rotation, de projection, et dessine le triangle pixel par pixel :</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">project</span><span class="p">(</span><span class="n">v</span>: <span class="kp">&amp;</span><span class="nc">Vec3</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">64.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">4.0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">factor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">64.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">factor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">64.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Les FPS s'affichent sur le port série.</p>
+<hr />
+<h2 id="infos-supplementaires">Infos Supplémentaires</h2>
 <ul>
-<li>La fonction Rust <code>write_bmp_from_rgba_matrix</code> convertit le tableau brut RGBA en image BMP en mémoire.</li>
-<li>Elle utilise la crate Rust <a href="https://crates.io/crates/bmp"><code>bmp</code></a> pour la gestion des pixels et la sauvegarde du fichier au format BMP.</li>
-</ul>
-<hr />
-<h2 id="licence-mit">Licence MIT</h2>
-<ul>
-<li>Merci de me contacter si vous voulez utiliser mon travail.</li>
-<li>Plus d'<a href="https://fr.wikipedia.org/wiki/Licence_MIT">informations</a></li>
+<li><strong>Pas de matériel spécial</strong> — ça marche avec n'importe quelles broches GPIO. Parfait pour le prototypage.</li>
+<li><strong>Taille configurable</strong> — on change la résolution dans le code, le compilateur vérifie tout tout seul.</li>
+<li><strong>Mémoire minimum</strong> — pas de heap, pas d'allocations. Le framebuffer 64×64 prend 8 Ko <strong>sur la stack</strong>.</li>
+<li><strong>Format standard</strong> — les pixels sont en RGB565 (courant), mais la matrice affiche en 8 couleurs. La conversion se fait à la volée.</li>
 </ul>
 
 
