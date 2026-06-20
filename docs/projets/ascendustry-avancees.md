@@ -4,7 +4,7 @@
 
 ![Aperçu du dashboard TUI](../assets/images/ascendustry-avancees/tui_server.png)
 
-Le précédent article sur le prédécesseur du projet datait du 6 mai et portait sur l'architecture réseau de *Satisfactorio*. Depuis, le projet a changé de nom pour **Ascendustry**, et énormément de fonctionnalités ont été ajoutées — principalement côté serveur et gameplay. Voici un tour d'horizon de ce qui a été fait depuis.
+Le précédent article sur le prédécesseur du projet datait du 6 mai et portait sur l'architecture réseau de *Ascendustry*. Depuis, le projet a changé de nom pour **Ascendustry**, et énormément de fonctionnalités ont été ajoutées — principalement côté serveur et gameplay. Voici un tour d'horizon de ce qui a été fait depuis.
 
 ---
 

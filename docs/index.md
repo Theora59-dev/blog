@@ -43,7 +43,7 @@ Librairie Rust d'encodage/décodage BMP avec interface C, utilisée dans un proj
 ## Derniers articles
 
 - [Ascendustry — Avancées récentes](./projets/ascendustry-avancees.md)
-- [Ascendustry — Réseau & Chiffrement](./projets/satisfactorio-reseau-chiffrement.md)
+- [Ascendustry — Réseau & Chiffrement](./projets/ascendustry-reseau-chiffrement.md)
 - [Driver HUB75 pour matrice LED](./projets/driver-hub75.md)
 - [La gestion d'erreurs en Rust](./cours/rust-errors.md)
 - [Projet Saturne](./projets/simple-planet-gen/index.md)

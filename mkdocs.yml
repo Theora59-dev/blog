@@ -13,7 +13,7 @@ nav:
   - Assembler MIPS: cours/assembler-MIPS.md
   - Librairie BMP: projets/bmp-image-manager.md
   - Projet Saturne: projets/simple-planet-gen/index.md
-  - Satisfactorio - Réseau & Chiffrement: projets/satisfactorio-reseau-chiffrement.md
+  - Ascendustry - Réseau & Chiffrement: projets/ascendustry-reseau-chiffrement.md
   - Ascendustry - Avancées récentes: projets/ascendustry-avancees.md
   - Driver HUB75 pour matrice LED: projets/driver-hub75.md
   - La gestion d'erreurs en Rust: cours/rust-errors.md
